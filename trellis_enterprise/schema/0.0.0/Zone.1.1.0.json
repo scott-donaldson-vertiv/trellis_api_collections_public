@@ -1,0 +1,331 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Zone.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this resource."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Free form comment."
+    },
+    "displayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "readonly": true
+    },
+    "displayCategoryProgrammaticNameDisplay": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of this resource.",
+      "readonly": true
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of category programmatic names this resource belongs to, includes the display category",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the device or container in the hierarchy, in the form of Enterprise->Building->Floor etc.."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner name of the resource, i.e. which user normally manages this resource."
+    },
+    "ownerEmail": {
+      "type": "string",
+      "description": "Owner email to contact for this resource."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "recordCreateDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "readonly": true
+    },
+    "capacities": {
+      "type": "array",
+      "description": "Capacities for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": true
+          },
+          "programmaticNameDisplay": {
+            "type": "string",
+            "readonly": true
+          },
+          "capacityValue": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "userDefinedProperties": {
+      "type": "array",
+      "description": "User Defined Properties for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "name": {
+            "type": "string",
+            "readonly": true
+          },
+          "udpValue": {
+            "type": "string"
+          },
+          "ownerTenantId": {
+            "type": "string",
+            "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+          },
+          "tenantIds": {
+            "type": "array",
+            "description": "List of tenant names that this resource is shared to.",
+            "items": {
+              "type": "string",
+              "description": "The tenant name that this resource is shared to"
+            }
+          },
+          "sharedTenancyOption": {
+            "type": "string",
+            "enum": [
+              "SHARED",
+              "ALL",
+              "NONE"
+            ],
+            "description": "Specify different shared tenancy options"
+          },
+          "udpType": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "FLOAT",
+              "INTEGER",
+              "LONG",
+              "BOOLEAN",
+              "BIGDECIMAL",
+              "TIME",
+              "DATE"
+            ],
+            "description": "The data type of the UDP value such as String, Float, Integer, Long, Boolean, Date(An ISO8601 format string), BigDecimal",
+            "readonly": true
+          }
+        }
+      }
+    },
+    "alarmCounts": {
+      "type": "object",
+      "description": "The counts for critical, warning, normal and total alarms for this zone.",
+      "properties": {
+        "criticalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with critical severity for this zone.",
+          "readonly": true
+        },
+        "warningAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with warning severity for this zone.",
+          "readonly": true
+        },
+        "normalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with normalseverity for this zone.",
+          "readonly": true
+        },
+        "totalAlarmCount": {
+          "type": "integer",
+          "description": "The total number of alarms for this zone.",
+          "readonly": true
+        }
+      }
+    },
+    "maintenanceMode": {
+      "type": "boolean",
+      "description": "If the zone is put into maintenance mode",
+      "readonly": true
+    },
+    "alarmStatus": {
+      "type": "string",
+      "description": "Overall alarm status for the zone.",
+      "readonly": true
+    },
+    "deviceState": {
+      "type": "string",
+      "description": "Overall Device State for the zone",
+      "readonly": true
+    },
+    "polygon": {
+      "properties": {
+        "vertices": {
+          "type": "array",
+          "readonly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "readonly": true
+              },
+              "y": {
+                "type": "number",
+                "readonly": true
+              },
+              "ordinal": {
+                "type": "number",
+                "readonly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "unusable": {
+      "type": "boolean",
+      "description": "If the container is unusable (can't have anything placed in it)",
+      "readonly": true
+    },
+    "zoneUseProgrammaticName": {
+      "type": "string",
+      "description": "The programmatic name of the Zone use( the purpose of this zone)",
+      "readonly": true
+    },
+    "zoneUseProgrammaticNameDisplay": {
+      "type": "string",
+      "description": "Display String for the Zone use.",
+      "readonly": true
+    },
+    "zoneUseIsUserDefined": {
+      "type": "boolean",
+      "readonly": true,
+      "description": "Zone use was defined by the user and not the system"
+    },
+    "zoneColor": {
+      "type": "string",
+      "description": "Zone color defined by the user as RGB string(6 digit hex value)"
+    },
+    "levels": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The globally unique id of this Space Level.",
+          "readonly": true
+        },
+        "nameDisplay": {
+          "type": "string",
+          "description": "The display name for the Level type.",
+          "readonly": true
+        },
+        "programmaticName": {
+          "type": "string",
+          "description": "The programmatic name for the Level type.",
+          "readonly": true
+        },
+        "isUserDefined": {
+          "type": "boolean",
+          "description": "True if this level was defined by a user, false if defined by the system",
+          "readonly": true
+        },
+        "zOrder": {
+          "type": "number",
+          "description": "The Z order this level is painted with in graphic displays of the levels",
+          "readonly": true
+        }
+      }
+    },
+    "permissions": {
+      "type": "string",
+      "enum": [
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "description": "FGA permissions that this user has for this zone",
+      "readonly": true
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "type": "object",
+          "description": "Hypermedia self link.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "devices": {
+          "type": "object",
+          "description": "Hypermedia link to child devices collection.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "parents": {
+          "type": "object",
+          "description": "Hypermedia link to parent containers collection.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "required": [
+        "self",
+        "devices"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

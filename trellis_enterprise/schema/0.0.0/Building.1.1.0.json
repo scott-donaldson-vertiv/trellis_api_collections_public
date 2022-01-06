@@ -1,0 +1,298 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Building.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this resource.",
+      "requiredOnCreate": true
+    },
+    "comment": {
+      "type": "string",
+      "description": "Free form comment."
+    },
+    "displayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "readonly": true
+    },
+    "displayCategoryProgrammaticNameDisplay": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of this resource.",
+      "readonly": true
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of category programmatic names this resource belongs to, includes the display category",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the device or container in the hierarchy, in the form of Enterprise->Building->Floor etc.."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner name of the resource, i.e. which user normally manages this resource."
+    },
+    "ownerEmail": {
+      "type": "string",
+      "description": "Owner email to contact for this resource."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "recordCreateDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "readonly": true
+    },
+    "capacities": {
+      "type": "array",
+      "description": "Capacities for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "programmaticNameDisplay": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "capacityValue": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "userDefinedProperties": {
+      "type": "array",
+      "description": "User Defined Properties for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "name": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "udpValue": {
+            "type": "string"
+          },
+          "ownerTenantId": {
+            "type": "string",
+            "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+          },
+          "tenantIds": {
+            "type": "array",
+            "description": "List of tenant names that this resource is shared to.",
+            "items": {
+              "type": "string",
+              "description": "The tenant name that this resource is shared to"
+            }
+          },
+          "sharedTenancyOption": {
+            "type": "string",
+            "enum": [
+              "SHARED",
+              "ALL",
+              "NONE"
+            ],
+            "description": "Specify different shared tenancy options"
+          },
+          "udpType": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "FLOAT",
+              "INTEGER",
+              "LONG",
+              "BOOLEAN",
+              "BIGDECIMAL",
+              "TIME",
+              "DATE"
+            ],
+            "description": "The data type of the UDP value such as String, Float, Integer, Long, Boolean, Date(An ISO8601 format string), BigDecimal",
+            "readonly": true
+          }
+        }
+      }
+    },
+    "alarmCounts": {
+      "type": "object",
+      "description": "The counts for critical, warning, normal and total alarms for this building.",
+      "properties": {
+        "criticalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with critical severity for this building.",
+          "readonly": true
+        },
+        "warningAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with warning severity for this building.",
+          "readonly": true
+        },
+        "normalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with normalseverity for this building.",
+          "readonly": true
+        },
+        "totalAlarmCount": {
+          "type": "integer",
+          "description": "The total number of alarms for this building.",
+          "readonly": true
+        }
+      }
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "Contact Phone Number for this resource."
+    },
+    "contactName": {
+      "type": "string",
+      "description": "Contact name for this resource."
+    },
+    "geographicLocation": {
+      "type": "object",
+      "description": "The global latitude/longitude coordinate of this building.",
+      "properties": {
+        "latitude": {
+          "type": "number"
+        },
+        "longitude": {
+          "type": "number"
+        }
+      }
+    },
+    "physicalPlacement": {
+      "type": "object",
+      "description": "The object ID of the parent Enterprise.",
+      "properties": {
+        "type": {
+          "requiredOnCreate": true,
+          "enum": [
+            "inContainer"
+          ]
+        },
+        "parentObjectOid": {
+          "type": "string",
+          "requiredOnCreate": true
+        }
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "description": "The first line of the address of this building."
+        },
+        "address2": {
+          "type": "string",
+          "description": "The second line of the address of this building."
+        },
+        "localityOrCity": {
+          "type": "string",
+          "description": "The city of the address of this building."
+        },
+        "stateOrProvince": {
+          "type": "string",
+          "description": "The State/Province of the address of this building."
+        },
+        "country": {
+          "type": "string",
+          "description": "The country of the address of this building."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal of the address of this building."
+        }
+      }
+    },
+    "permissions": {
+      "type": "string",
+      "enum": [
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "description": "FGA permissions that this user has for this building",
+      "readonly": true
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "floors": {
+          "description": "Hypermedia link to contained buildings collection.",
+          "type": "string",
+          "format": "uri"
+        },
+        "devices": {
+          "description": "Hypermedia link to contained devices collection.",
+          "type": "string",
+          "format": "uri"
+        },
+        "parents": {
+          "description": "Hypermedia link to parent containers collection.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self",
+        "floors",
+        "devices",
+        "parents"
+      ]
+    }
+  },
+  "required": [
+    "_links",
+    "capacities",
+    "userDefinedProperties"
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "title":"FeatureSet.1.1.0",
+  "type":"object",
+  "additionalProperties":true,
+  "properties":{
+    "id":{
+      "type":"string",
+      "description":"The globally unique id of this resource.",
+      "readonly":true
+    },
+    "featureName":{
+      "type":"string",
+      "description":"The name of this resource."
+    },
+    "featureType":{
+      "type":"string",
+      "description":"The type associated with this resource, it is unique."
+    },
+    "iconImageURI":{
+      "type":"string",
+      "description":"The image icon name.",
+      "readonly":true
+    },
+    "isNavagationEnabled":{
+      "type":"string",
+      "description":"Is this feature set navigable.",
+      "readonly":true
+    },
+    "menuItems":{
+      "type":"array",
+      "description":"List of menu items available for this resource, includes the display name.",
+      "readonly":true,
+      "items":{
+        "type":"object",
+        "properties":{
+          "displayName":{
+            "type":"string",
+			"description":"The name of the menu item.",
+			"readonly":true
+          },
+		  "displayOrder":{
+            "type":"integer",
+			"description":"The display order for the menu item.",
+			"readonly":true
+          },
+		  "enabled":{
+            "type":"boolean",
+			"description":"Is the menu item enabled.",
+			"readonly":true
+          },
+		  "hidden":{
+            "type":"boolean",
+			"description":"Is the menu item hidden.",
+			"readonly":true
+          },
+		  "iconURI":{
+            "type":"string",
+			"description":"The URI path of the menu item.",
+			"readonly":true
+          },
+		  "menuItemURI":{
+            "type":"string",
+			"description":"The URI of the menu item link.",
+			"readonly":true
+          },
+		  "action":{
+            "type":"string",
+			"description":"The action for the menu item.",
+			"readonly":true
+          },
+		  "type":{
+            "type":"integer",
+			"description":"The type of the menu item, such as label, checkbox, action, separator, etc.",
+			"readonly":true
+          },
+		  "resourceBundleURI":{
+            "type":"string",
+			"description":"The URI for the menu item resource.",
+			"readonly":true
+          },
+		  "frameworkRegion":{
+            "type":"string",
+			"description":"The framework region of the menu item used for CGA.",
+			"readonly":true
+          },
+		  "parameters":{
+            "type":"string",
+			"description":"The parameters of the menu item .",
+			"readonly":true
+          },
+		  "parentOid":{
+            "type":"string",
+			"description":"Pointer to the parent menu item, null is a top level.",
+			"readonly":true
+          }
+        }
+      }
+    },
+	 
+    "permissions": {
+      "type": "string",
+      "enum": [
+        "ReadOnly"
+      ],
+      "description": "FGA permissions that this user has for this resource.",
+      "readonly": true
+    },
+    "_links":{
+      "type":"object",
+      "description":"Hypermedia (HAL) links to self and other resources.",
+      "properties":{
+        "self":{
+          "description":"Hypermedia self link.",
+          "type":"string",
+          "format":"uri"
+        }
+		
+      }
+    }
+  },
+  "required":[
+    "_links",
+    "featureName",
+    "featureType"
+	]
+}

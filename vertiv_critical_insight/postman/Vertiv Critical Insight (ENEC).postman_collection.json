@@ -1,0 +1,609 @@
+{
+	"info": {
+		"name": "Vertiv Trellis Critical Insight (ENEC)",
+		"_postman_id": "005adcd0-7c51-acbd-5e46-9cca014fe815",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authorization Key",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/authorizationkey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"username\":\"{{username}}\",\n\t\t\"password\":\"{{password}}\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/authorizationkey",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"authorizationkey"
+							]
+						},
+						"description": "Requested to validate the user; returns an authorization key to be used in subsequent authentication calls.\n\nNote:\nThe authorization key doesn’t have an expiration time, it will allow us to not store the username/password on the phone by keeping this instead.\n\nResponses:\n200 - Success with response body.\n400 - Bad/Malformed Request.\n401 - Invalid username/password."
+					},
+					"response": []
+				},
+				{
+					"name": "/webservices/authorizationkey",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/authorizationkey/{id}",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"authorizationkey",
+								"{id}"
+							]
+						},
+						"description": "Requested to invalidate the key, requiring the user to re-validate.\n\nResponses:\n200 - Success without response body.\n400 - Bad/Malformed Request.\n500 - Server internal error."
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5b2cd224-6699-4bb8-a6a9-3ae2e3c2c74b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "eab5e2d4-b06d-4cce-b640-3c3b88eb51d4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Sites",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/sites",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "auth",
+								"value": "{sessionToken}",
+								"description": "Session token obtained from sessiontoken call."
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\"customerId\":\"\",\n   \"areaId\":\"\",\n   \"includeSubAreas\":\"\",\n   \"ccid_groupId\":\"\",\n   \"ip_phone\":\"\",\n   \"siteName\":\"\",\n   \"category\":\"\",\n   \"startDate\":\"\",\n   \"endDate\":\"\",\n   \"orderBy\":\"4\",\n   \"orderSort\":\"1\"\n  }\n]"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/sites",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"sites"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0",
+									"equals": true,
+									"description": "Result page to return.",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "100",
+									"equals": true,
+									"description": "Results per page to return.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Introduction\n============\nRequested to receive the list of sites for the current user regarding the parameters passed.\n\nAuthentication\n==============\nAuthorization is required to generate Session Token, the Session Token must be included in query headers.\n\nRequest Body\n============\nThe following can be included in the body payload to filter results.\n- customerId: Identifier of the customer to look for or empty string for all the customers.\n- areaId: Identifier of the area to look for or empty string for all the areas.\n- includeSubAreas: Boolean field, true by default\n- ccid_groupId*= Site identifier or group id to filter by. The ccid must be a decimal number between 1 and 255.\n- ip_phone*= IP address or phone number to filter by.\n- siteName*: Name of the site. If empty all the sites will apply.\n- category: Possible values: 1- Critical+Urgent+Observation, 2- Critical+Urgent, 3- Critical, 4- Urgent, 5- Observation, 6- Informative\n- startDate, endDate: Interval when the last connection to the site was made. Its format depends on the locale used: for en_XX, YYYY-MM-DD and for es_XX and ru_XX, DD-MM-YYYY.\n- orderBy: Possible values: 1- Last Connection date, 2- Name of the site, 3- Alarm category, 4- Customer name\n- orderSort: Possible values: 1- Ascending, 2- Descending\n\n\n- * These wildcard symbols can be used in the field:\n- % (percentage) Zero or more characters\n- _ (underscore) One character\n\nExample #1\n----------\n<\n{\n  \"customerId\":\"1\",\n  \"areaId\":\"1\",\n  \"includeSubAreas\":\"false\",\n  \"ccid_groupId\":\"\",\n  \"ip_phone\":\"10.88.46.%\",\n  \"siteName\":\"%a%\",\n  \"category\":\"1\",\n  \"startDate\":\"2015-12-05\",\n  \"endDate\":\"2016-08-30\",\n  \"orderBy\":\"1\",\n  \"orderSort\":\"2\"\n}\n>\n\nResponse Codes\n==============\nSuccess Codes\n-------------\n200 - Success with response body.\n\nError Codes\n-----------\n400 - Bad/Malformed Request.\n403 - Insufficient permissions to satisfy request.\n401 - Invalid username/password.\n\nResponse Header\n===============\n\n- recordCount: The total number of sites in the report.\n\nResponse Body\n=============\n\n- ccid, groupId: The addition of both string fields is the unique identifier of a site. The ccid is a hexadecimal number between 00 and FF (letters in uppercase).\n- customerName: Name of the customer the site belongs to.\n- areaName: Name of the area the site belongs to.\n- siteName: Name of the site.\n- lastConnection: It is a string with the formatted date and time according to the locale or with the empty string if no connection has been done yet.\n- alarmStatus: Counter of the active alarms in the site grouped by categories, separated by |.\n- siteStatus: Most important data of the site, separated by |.\n- additionalInfo: Additional information about the configuration of the site, like its procotol, IP address, phone number, …, , separated by |.\n\nExample #1\n----------\n<\n[\n {\n  \"ccid\":\"01\",\n  \"groupId\":\"ATS300\",\n  \"customerName\":\"Empresa 1\",\n  \"areaName\": \"España\",\n  \"siteName\":\"ATS ASCO S300G\",\n  \"lastConnection\":\"2016-05-20 13:54:24\", \n  \"alarmStatus\" : \"0 Critical|0 Urgent|0 Observation|0 Informative\",\n  \"siteStatus\" : \"Load voltage AB 119 V|Load voltage BC 120 V|Load voltage CA 240 V|Load current A 18 A|Load current B 0 A|Load current C 16 A\",\n  \"additionalInfo\" : \"Site Identifier/Group: 01/ATS300|IP Address/Telephone: 10.88.46.57:161|Protocol: SNMP|Polling code: 0\"\n }\n]\n>\n"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "cfa26687-525b-462d-b6a8-1d718c59ad1f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9aed9daa-04bc-498e-b6d2-5a750f0df090",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Alarms",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/alarms",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "auth",
+								"value": "{sessionToken}",
+								"description": "Session token obtained from sessiontoken call."
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"reportType\":\"\",\n\t\t\"customerId\": \"\",\n\t\t\"areaId\":\"\",\n\t\t\"includeSubAreas\":\"\",\n\t\t\"siteName\":\"\",\n\t\t\"alarmId\":\"\",\n\t\t\"category\":\"\",\n\t\t\"status\":\"\",\n\t\t\"startDate\":\"\", \n\t\t\"endDate\":\"\", \n\t\t\"orderBy\":\"4\",\n\t\t\"orderSort\":\"1\"\n\t}\n]\n"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/alarms",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"alarms"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0",
+									"equals": true,
+									"description": "Result page to return.",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "100",
+									"equals": true,
+									"description": "Results per page to return.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Introduction\n============\nRequested to receive the different types of alarm reports for the current user regarding the parameters passed.\n\nAuthentication\n==============\nAuthorization is required to generate Session Token, the Session Token must be included in query headers.\n\nRequest Body\n============\n\nExample #1\n----------\n<\n>\n\nResponse Codes\n==============\nSuccess Codes\n-------------\n200 - Success with response body.\n\nError Codes\n-----------\n400 - Bad/Malformed Request.\n403 - Insufficient permissions to satisfy request.\n401 - Invalid username/password.\n\nResponse Header\n===============\n\n- recordCount: The total number of sites in the report.\n\nResponse Body\n=============\n\n\nExample #1\n----------\n<\n\n>\n"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8afc8069-e91c-4c3b-af93-6e6d1df00996",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f7f03f7-f7a4-4506-9d0a-13e7c5e9d01b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Site Data Tag",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/datatag",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "auth",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"dataTag\":\"\",\n\t\t\"customerId\": \"\",\n\t\t\"areaId\":\"\", \n\t\t\"includeSubAreas\":\"true\", \n\t\t\"ccid\":\"\", \n\t\t\"groupId\":\"\",\n\t\t\"siteName\":\"\",\n\t\t\"orderBy\":\"1\",\n\t\t\"orderSort\":\"2\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/datatag",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"datatag"
+							]
+						},
+						"description": "Introduction\n============\nRequested to receive the list of sites for the current user regarding the parameters passed.\n\nAuthentication\n==============\nAuthorization is required to generate Session Token, the Session Token must be included in query headers.\n\nRequest Body\n============\nThe following can be included in the body payload to filter results.\n\n- dataTag: Possible values: see list of available data. Can be selected from the pickList.\n- customerId: Identifier of the customer to look for or empty string for all the customers.\n- areaId: Identifier of the area to look for or empty string for all the areas.\n- includeSubAreas: Boolean field, true by default\n- ccid,groupId*= The addition of both string fields is the unique identifier of a site. If empty all the sites will apply. The ccid must be a decimal number between 1 and 255.\n- siteName*: Name of the site. If empty all the sites will apply.\n- orderBy: Possible values: 1- Site name, 2- Unit name, 3- Area,4- Customer\n- orderSort: Possible values: 1- Ascending, 2- Descending\n\n- * These wildcard symbols can be used in the field:\n- % (percentage) Zero or more characters\n- _ (underscore) One character\n\nExample #1\n----------\n<\n[\n\t{\n\t\t\"dataTag\":\"2\",\n\t\t\"customerId\": \"33\",\n\t\t\"areaId\":\"2\", \n\t\t\"includeSubAreas\":\"true\", \n\t\t\"ccid\":\"1\", \n\t\t\"groupId\":\"4436\",\n\t\t\"siteName\":\"%UK%\",\n\t\t\"orderBy\":\"1\",\n\t\t\"orderSort\":\"2\"\n\t}\n]\n>\n\nResponse Codes\n==============\nSuccess Codes\n-------------\n200 - Success with response body.\n\nError Codes\n-----------\n400 - Bad/Malformed Request.\n403 - Insufficient permissions to satisfy request.\n401 - Invalid username/password.\n\nResponse Header\n===============\n\n- recordCount: The total number of sites in the report.\n\nResponse Body\n=============\n\n- ccid, groupId: The addition of both string fields is the unique identifier of a site. The ccid is a hexadecimal number between 00 and FF (letters in uppercase).\n- functNum:Unique identifier of the unit in the equipment the value comes from.\n- ccidExtra: Unique identifier of the subequipment in case of using the protocol EEM MultiCCID.\n- customerId: Unique identifier of the customer the site belongs to.\n- areaId: Unique identifier of the area where the site is assigned.\n- customerName: Name of the customer the site belongs to.\n- areaName: Name of the area where the site is assigned.\n- siteName: Name of the site.\n- unitName: Name of the unit in the equipment the value comes from.\n- unitNum: Number of the unit in the equipment the value comes from.\n- valueNum: Identifier of the analog/digital inside its unit.\n- valueText: Description of the analog/digital.\n- value: Value tagged as in the dataTag input parameter.\n- categoryUnit: Category (if digital value) or unit of measurement (if analog value) for the value obtained.\n\nExample #1\n----------\n<\n [\n  {\n   “ccid”:”0A”,\n   ”groupId”:”TEST”,\n   ”functNum”:”1633”, \n   ”ccIdExtra”:”0A”, \n   ”areaId”:”1”,\n   ”customerId”:”3”,\n   ”customerName”:”Emerson”, ”areaName”:”Spain”,\n   ”siteName”:”Madrid_DC”,\n   ”unitName”:”Power Consumption”,\n   ”unitNum”:”1”, \n   ”valueText”:”Line Current L1”,\n   ”valueNum”:”5”,\n   ”value”:”35”,\n   ”categoryUnit”:”Kwh”},\n   … \n   ]\n>\n"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0c894566-9f00-4a04-9263-9e767bb6575d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7bb47cd-00e1-4142-b13c-9882aca3673f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Alarm",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/alarm?alarmId={id}{&statusId=P}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "auth",
+								"value": "{sessionToken}",
+								"description": "Session token obtained from sessiontoken call."
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"reportType\":\"\",\n\t\t\"customerId\": \"\",\n\t\t\"areaId\":\"\",\n\t\t\"includeSubAreas\":\"\",\n\t\t\"siteName\":\"\",\n\t\t\"alarmId\":\"\",\n\t\t\"category\":\"\",\n\t\t\"status\":\"\",\n\t\t\"startDate\":\"\", \n\t\t\"endDate\":\"\", \n\t\t\"orderBy\":\"4\",\n\t\t\"orderSort\":\"1\"\n\t}\n]\n"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/alarm",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"alarm"
+							],
+							"query": [
+								{
+									"key": "alarmId",
+									"value": "",
+									"equals": true,
+									"description": "Alarm identifier.",
+									"disabled": true
+								},
+								{
+									"key": "statusId",
+									"value": "",
+									"equals": true,
+									"description": "Possible values: P- Acknowledge",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Introduction\n============\nRequested to acknowledge an alarm.\n\nAuthentication\n==============\nAuthorization is required to generate Session Token, the Session Token must be included in query headers.\n\nRequest Body\n============\nNone.\n\n\nResponse Codes\n==============\nSuccess Codes\n-------------\n200 - Success with response body.\n\nError Codes\n-----------\n400 - Bad/Malformed Request.\n401 - Invalid username/password.\n403 - Insufficient permissions to satisfy request.\n\nResponse Header\n===============\nNone.\n\nResponse Body\n=============\n\nExample #1\n----------\n\n<\n {\n  \"updated\":\"false\",\n  \"message\":\"The alarm can only be acknowledged by the same user that rejected it\"\n }\n>\n\nExample #2\n----------\n\n<\n {\n  \"updated\":\"true\",\n  \"message\":\"The alarm was acknowledged successfully\"\n }\n>\n"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6e68a9b4-0d7d-4d10-8964-0b4960410186",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ab83841c-6465-407f-94a4-9b03c69047e9",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Session Token",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/sessiontoken",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/sessiontoken/{id}",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"sessiontoken",
+								"{id}"
+							]
+						},
+						"description": "Introduction\n==============\nRequested to invalidate the session token manually, forcing the user to re-authenticate with their authorization key.\n\nSuccess Codes\n=============\n200 - Success with response body.\n\nError Codes\n===========\n400 - Bad/Malformed Request.\n500 - Server internal error."
+					},
+					"response": []
+				},
+				{
+					"name": "/webservices/sessiontoken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n\t\t\"authorizationKey\":\"{authkey}\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/sessiontoken",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"sessiontoken"
+							]
+						},
+						"description": "Requested to get a session token from an authorization key; as long as the authorization key is valid returns a session token, else return 401. The session token will expire automatically when a web service using it has not been called in 30 minutes.\n\nResponses:\n200 - Success with response body.\n400 - Bad/Malformed Request.\n401 - Invalid username/password."
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "952deb5f-4519-4920-ae86-38861f7d8928",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "34416cbc-a0b0-4de0-96db-ad769e0e925f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Picker Lists",
+			"description": "",
+			"item": [
+				{
+					"name": "/webservices/picklist?pickListID={id}",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "Supports application/json only."
+							},
+							{
+								"key": "auth",
+								"value": "",
+								"disabled": true
+							},
+							{
+								"key": "locale",
+								"value": "en_US",
+								"description": "Supports en_US, es_ES, ru_RU."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{proto}}://{{host}}:{{port}}/webservices/picklist",
+							"protocol": "{{proto}}",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"webservices",
+								"picklist"
+							],
+							"query": [
+								{
+									"key": "pickListID",
+									"value": "",
+									"equals": false,
+									"description": "Used to get the list type specified by this parameter.",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Introduction\n============\nRequested to receive the lists of the most common items throughout the application. The user must have the administrator profile to use it.\n\nAuthentication\n==============\nAuthorization is required to generate Session Token, the Session Token must be included in query headers.\n\nRequest Parameters\n==================\n\n- pickListID: used to get the list type specified by this parameter. Possible values:\n1 =Customers of the current user\n2 =Areas\n5 = Alarm statuses translated\n6 = Alarm categories translated\n7 = Available data tags (for analog inputs and analog outputs)\n\nRequest Body\n============\nNone\n\nResponse Codes\n==============\nSuccess Codes\n-------------\n200 - Success with response body.\n\nError Codes\n-----------\n400 - Bad/Malformed Request.\n403 - Insufficient permissions to satisfy request.\n401 - Invalid username/password.\n\nResponse Header\n===============\nNone.\n\nResponse Body\n=============\n\n\nExample #1\n----------\n<\n [\n  {\"id\":\"\",\"text\":\"All Customers\"}, {\"id\":\"1\",\"text\":\"MTN\"},{\"id\":\"2\",\"text\":\"Mobinil\"}\n ]\n>\n\nExample #2\n----------\n<\n [\n  {\"id\":\"\",\" text\":\"All Areas\"},\n  {\"id\":\"1\",\" text\":\"Europe\"},\n  {\"id\":\"2\",\"text\":\"America\"\n ]\n>\n\nExample #3\n----------\n<\n [\n  {\"id\":\"\",\"text\":\"All Categories\"}, {\"id\":\"A\",\"text\":\"Urgent+Critical\"},\n  {\"id\":\"A1\",\"text\":\"Critical\"}, \n  {\"id\":\"A2\",\"text\":\"Urgent\"},\n  {\"id\":\"O1\",\"text\":\"Observation\"}\n ]\n>"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer"
+			}
+		}
+	]
+}

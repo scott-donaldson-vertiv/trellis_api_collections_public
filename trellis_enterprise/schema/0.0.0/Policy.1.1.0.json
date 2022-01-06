@@ -1,0 +1,45 @@
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "title":"Policy.1.1.0",
+  "type":"object",
+  "additionalProperties":true,
+  "properties":{
+    "id":{
+      "type":"string",
+      "description":"The globally unique id of this resource.",
+      "readonly":true
+    },
+    "roleName":{
+      "type":"string",
+      "searchable":true,
+      "description":"Name of the role, i.e. The role that it is giving rights to."
+    },    
+    "resourceId":{
+      "type":"string",
+      "searchable":true,
+      "description":"Resource id is any container, i.e.  The id of Enterprice, Building, Floor, Space, Zone."
+    },
+	"accessRights":{
+      "type":"string",
+      "searchable":true,
+      "description":"It is the right it self, i.e.  The posible values are NONE, VIEW, or MANAGE."
+    },     
+    "_links":{
+      "type":"object",
+      "description":"Hypermedia (HAL) links to self and other resources.",
+      "properties":{
+        "self":{
+          "description":"Hypermedia self link.",
+          "type":"string",
+          "format":"uri"
+        }
+      },
+      "required":[
+        "self",
+		"roleName",
+		"resourceId",
+        "accessRights"        
+      ]
+    }
+  }
+}

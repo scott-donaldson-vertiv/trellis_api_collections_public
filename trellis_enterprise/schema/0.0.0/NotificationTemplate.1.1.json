@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NotificationTemplate.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the template",
+      "requiredOnCreate": true
+    },
+    "emailSubject": {
+      "type": "string",
+      "description": "The subject of the notification.",
+      "requiredOnCreate": true
+    },
+    "bodyRepeating": {
+      "type": "string",  
+      "description": "The content of the notification."
+    },
+    "bodySummary": {
+      "type": "string",
+      "description": "The notification summary."
+    },
+    "emailMessageFormat": {
+      "type": "string",
+      "enum": [
+        "PLAINTEXT",
+        "RICHTEXT",
+        "HTML"
+      ],
+      "description": "Notification formats supported. Defaulted to PLAINTEXT if no provided."
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "ENGLISH",
+        "SPANISH",
+        "FRENCH",
+        "GERMAN"
+      ],
+      "description": "Notification languages supported. Defaulted to ENGLISH if no provided."
+    },
+    "templateType": {
+      "type": "string",
+      "enum": [
+        "EMAIL",
+        "SMS"
+      ],
+      "description": "Template types supported.",
+      "requiredOnCreate": true
+    },
+	"inUse": {
+      "type": "boolean",
+      "readonly": true,
+      "description": "Whether or not the template is already assigned to one or more notification rules"
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "readonly": true,
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

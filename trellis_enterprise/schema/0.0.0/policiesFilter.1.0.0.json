@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "policiesFilter.1.0.0",
+    "additionalProperties": false,
+    "description": "A Policy filter for the resources",
+    "type": "object",
+    "properties":{
+      "searchContainerName":{
+        "type":"string",
+        "searchable":true,
+        "description":"Name of the container or rack"
+      },    
+      "searchContainerType":{
+        "type":"string",
+        "searchable":true,
+        "description":"Type of the container or rack"
+      },
+      "accessRights":{
+        "type":"string",
+        "searchable":true,
+        "description":"It is the right it self, i.e.  The posible values are NONE, VIEW, or MANAGE."
+      }
+
+    }
+}

@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Connection.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of this Connection.",
+      "requiredOnCreate": true
+    },
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this Connection.",
+      "readOnly": true
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of connection(data/power).",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "deviceIdFrom": {
+      "type": "string",
+      "description": "The globally unique id of the From Device for this Connection.",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "deviceIdTo": {
+      "type": "string",
+      "description": "The globally unique id of the To Device for this Connection.",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "openingIdFrom": {
+      "type": "string",
+      "description": "The globally unique id of the From Opening on the From Device for this Connection.",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "openingIdTo": {
+      "type": "string",
+      "description": "The globally unique id of the To Opening on the To Device for this Connection.",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "colorBits15": {
+      "type": "string",
+      "description": "The color for this Connection in hex, example 0x3ed6ca"
+    },
+    "deviceFromName": {
+      "type": "string",
+      "description": "The name of the of the From Device for this Connection."
+    },
+    "deviceFromDisplayCategoryName": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of the From Device for this Connection.",
+      "readonly": true,
+      "description": "The display category. Only returned from findByConnectionSearch and findByDeviceId."
+    },
+    "deviceFromDisplayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for the From Device for this Connection.",
+      "searchable": true,
+      "readonly": true,
+      "description": "The display category programmatic name. Only returned from findByConnectionSearch and findByDeviceId."
+    },
+    "deviceFromOpeningProgrammaticName": {
+      "type": "string",
+      "description": "The opening programmatic name of the From Device for this Connection.",
+      "readOnly": true
+    },
+    "deviceFromOpeningLabel": {
+      "type": "string",
+      "description": "The opening label of the From Device for this Connection."
+    },
+    "deviceLocationFrom": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the From Device or container in the hierarchy, in the form of Enterprise->Building->Floor etc..Only returned from findByConnectionSearch and findByDeviceId."
+    },
+    "deviceToName": {
+      "type": "string",
+      "description": "The name of the of the To Device for this Connection."
+    },
+    "deviceToDisplayCategoryName": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of the To Device for this Connection. Only returned from findByConnectionSearch and findByDeviceId.",
+      "readonly": true
+    },
+    "deviceToDisplayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for the To Device for this Connection. Only returned from findByConnectionSearch and findByDeviceId.",
+      "searchable": true,
+      "readonly": true
+    },
+    "deviceToOpeningProgrammaticName": {
+      "type": "string",
+      "description": "The opening programmatic name of the From Device for the To Device for this Connection.",
+      "readOnly": true
+    },
+    "deviceToOpeningLabel": {
+      "type": "string",
+      "description": "The opening label of the To Device for this Connection."
+    },
+    "deviceLocationTo": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the To Device or container in the hierarchy, in the form of Enterprise->Building->Floor etc..Only returned from findByConnectionSearch and findByDeviceId."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "isInternal": {
+      "type": "boolean",
+      "description": "True if the connection is internal to a single device",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "type": "object",
+          "description": "Hypermedia self link.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri",
+              "readOnly": true
+            }
+          }
+        },
+        "fromDevice": {
+          "description": "Hypermedia link to the device on the From Side of the connection.",
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri",
+              "readOnly": true
+            }
+          }
+        },
+        "toDevice": {
+          "description": "Hypermedia link to the device on the To Side of the connection.",
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri",
+              "readOnly": true
+            }
+          }
+        }
+      },
+      "required": [
+        "self",
+        "fromDevice",
+        "toDevice"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

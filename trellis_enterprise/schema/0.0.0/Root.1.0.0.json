@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Root.1.0.0",
+    "type": "object",
+    "additionalProperties": true,
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the Trellis API.",
+            "readonly": true
+        },
+        "apiVersion": {
+            "type": "string",
+            "description": "The version of the Trellis API.",
+            "pattern": "^[0-9]+.[0-9]+.[0-9]+$",
+            "readonly": true
+        },
+        "_links": {
+            "type": "object",
+            "description": "Hypermedia (HAL) links to self, other resources, and documentation.",
+            "properties": {
+                "help": {
+                    "type": "object",
+                    "description": "Hypermedia link to online help documentation for the API",
+                    "properties": {
+                        "href": {
+                            "type": "string",
+                            "readonly": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "apiVersion",
+        "name",
+        "_links"
+    ]
+}

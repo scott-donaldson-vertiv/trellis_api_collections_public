@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Collection.1.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and a collection of resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            },
+            "templated": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "required": [
+        "self"
+      ]
+    },
+    "_embedded": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "enterprises": {
+          "type": "array"
+        },
+        "buildings": {
+          "type": "array"
+        },
+        "floors": {
+          "type": "array"
+        },
+        "spaces": {
+          "type": "array"
+        },
+        "zones": {
+          "type": "array"
+        },
+        "dataCenters": {
+          "type": "array"
+        },
+        "devices": {
+          "type": "array"
+        },
+        "notificationPrefererences": {
+          "type": "array"
+        },
+        "notificationTemplates": {
+          "type": "array"
+        },
+        "userPrefererences": {
+          "type": "array"
+        },
+        "users": {
+          "type": "array"
+        },
+        "roles": {
+          "type": "array"
+        },
+        "alarms": {
+          "type": "array"
+        },
+        "responseHeaders": {
+          "type": "array"
+        },
+        "systemProperties": {
+          "type": "array"
+        },
+        "containers": {
+          "type": "array"
+        },
+        "registry": {
+          "type": "array"
+        },
+        "userSettings": {
+          "type": "array"
+        }
+      }
+    },
+    "page": {
+      "description": "Pagination parameters for paged data.",
+      "properties": {
+        "size": {
+          "type": "number",
+          "description": "The number of items in this page."
+        },
+        "totalElements": {
+          "type": "number",
+          "description": "The total number of items in the within dataset."
+        },
+        "totalPages": {
+          "type": "number",
+          "description": "The total number of pages for all items in the dataset."
+        },
+        "number": {
+          "type": "number",
+          "description": "The current page numner being returned."
+        }
+      }
+    }
+  }
+}

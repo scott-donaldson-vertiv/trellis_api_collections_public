@@ -1,0 +1,24 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "policiesAssignTemplates.1.0.0",
+    "additionalProperties": false,
+    "description": "A Policy for the resource",
+    "type": "object",
+    "properties":{
+      "roleName":{
+        "type":"string",
+        "searchable":true,
+        "description":"Name of the role, i.e. The role that it is giving rights to."
+      },    
+      "resourceId":{
+        "type":"string",
+        "searchable":true,
+        "description":"Resource id is any container, i.e.  The id of Enterprice, Building, Floor, Space, Zone., Rack and firsl level devices withing the Rack."
+      },
+      "accessRights":{
+        "type":"string",
+        "searchable":true,
+        "description":"It is the right it self, i.e.  The posible values are NONE, VIEW, or MANAGE."
+      } 
+    }
+}

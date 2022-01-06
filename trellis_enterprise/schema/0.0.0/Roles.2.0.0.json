@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Roles.2.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "description": {
+      "type": "string",
+      "description": "The role description",
+      "maxLength": 4000
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the role",
+      "pattern": "^[a-zA-Z0-9_-]*$",
+      "minLength": 1,
+      "maxLength": 60,
+      "requiredOnCreate": true
+    },
+    "deletable": {
+      "type": "boolean",
+      "description": "Whether or not the role can be deleted"
+    },
+    "superRole": {
+      "type": "boolean",
+      "description": "Whether or not the role is a super role"
+    },
+    "isSystemAccount": {
+      "type": "boolean",
+      "description": "Whether or not the role is a system account to run platform services"
+    },
+    "permissions": {
+      "type": "array",
+      "description": "List of permissions the role has",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the permission"
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the permission"
+          }
+        }
+      }
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether or not the role is enabled"
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia (HAL) self link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "users": {
+          "description": "Hypermedia (HAL) link to the collection of users for this role.",
+          "type": "string",
+          "format": "uri"
+        },
+        "userGroups": {
+          "description": "Hypermedia (HAL) link to the collection of user groups for this role.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self",
+        "users",
+        "userGroups"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

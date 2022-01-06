@@ -1,0 +1,16 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "assignRules.1.0.0",
+    "additionalProperties": false,
+    "description": "A collection of notification rules unique ids",
+    "type": "array",
+    "items": {
+      "$id": "#/items",
+      "type": "string",
+     "title": "The rule oid",
+     "examples": [
+       "d2ea42dc-e4db-4f7f-8517-5e1c8eb9c650",
+       "2582dd2f-80cb-417b-a623-2a4364adb8ab"
+     ]
+  }
+}

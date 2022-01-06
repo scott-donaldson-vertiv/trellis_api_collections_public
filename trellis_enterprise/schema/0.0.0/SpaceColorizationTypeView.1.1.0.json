@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SpaceColorizationTypeView.1.1.0",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The globally unique id of the container, example device id",
+        "readonly": "true"
+      },
+      "percentage": {
+        "type": "number",
+        "description": "Capacity percentage value",
+        "readonly": "true"
+      }
+    }
+  }
+}

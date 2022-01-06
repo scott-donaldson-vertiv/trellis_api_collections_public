@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "SystemProperties.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "systemProperties": {
+          "type": "array",
+          "description": "Definition of the system properties",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The unique name of this system property.",
+                "readonly": true
+              },
+              "valueType": {
+                "type": [
+                  "string"
+                ],
+                "enum": [
+                  "INTEGER",
+                  "LONG",
+                  "FLOAT",
+                  "BIGDECIMAL",
+                  "STRING",
+                  "BOOLEAN",
+                  "DATE",
+                  "CHARACTER"
+                ],
+                "description": "The data type of the value in this system property (ie. Integer, String, etc).",
+                "readonly": true
+              },
+              "value": {
+                "type": [
+                  "string"
+                ],
+                "description": "The data value in this system property.",
+                "readonly": false
+              },
+              "_links": {
+                "self": {
+                  "description": "Hypermedia self link to this system property.",
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          }
+        }
+      },
+      "_links": {
+        "type": "object",
+        "description": "Hypermedia (HAL) links to self and other resources.",
+        "properties": {
+          "self": {
+            "description": "Hypermedia self link.",
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "self"
+        ]
+      },
+      "required": [
+        "_links"
+      ]
+    }
+  }
+}

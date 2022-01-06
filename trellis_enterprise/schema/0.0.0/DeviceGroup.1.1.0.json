@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "DeviceGroup.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "searchable": true,
+      "requiredOnCreate": true,
+      "description": "The name of this resource."
+    },
+    "owner": {
+      "type": "string",
+      "searchable": true,
+      "description": "Owner name of the resource, i.e. which user normally manages this resource."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "capacities": {
+      "type": "array",
+      "description": "Capacities for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "description": "The programmatic name of this capacity. This never changes and acts like a unique ID.",
+            "searchable": true,
+            "readonly": true
+          },
+          "programmaticNameDisplay": {
+            "type": "string",
+            "description": "The display string (localized) for this capacity.",
+            "readonly": true
+          },
+          "capacityValue": {
+            "type": "number",
+            "description": "The actual value of this capacity as stored in the database.",
+            "searchable": true
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "groups": {
+          "description": "Hypermedia link to parent containers collection.",
+          "type": "string",
+          "format": "uri"
+        },
+        "devices": {
+          "description": "Hypermedia link to contained devices collection.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self",
+        "groups",
+        "devices"
+      ]
+    }
+  }
+}

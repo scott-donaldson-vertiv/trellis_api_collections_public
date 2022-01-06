@@ -1,0 +1,106 @@
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "title":"PUEConfiguration.1.1.0",
+  "type":"object",
+  "additionalProperties":true,
+  "properties":{
+    "id":{
+      "type":"string",
+      "description":"The globally unique id of this resource.",
+      "readonly":true
+    },
+    "pueLevel":{
+      "type":"string",
+      "searchable":true,
+      "description":"PUE Level, i.e. 0."
+    },    
+    "samplingFrequency":{
+      "type":"string",
+      "searchable":true,
+      "description":"PUE Sampling Frequency, i.e. 1."
+    },
+	"pueTarget":{
+      "type":"string",
+      "searchable":true,
+      "description":"PUE Target, i.e. 1.6."
+    },
+	"averagingPeriod":{
+      "type":"string",
+      "searchable":true,
+      "description":"PUE Averaging Period, i.e. 2."
+    },
+	"rateGood":{
+      "type":"string",
+      "searchable":true,
+      "description":"It is the Good Threshold, i.e.  1.2."
+    },
+	"rateCritical":{
+      "type":"string",
+      "searchable":true,
+      "description":"It is the Critical Threshold, i.e.  1.5."
+    },
+	"rateAtRisk":{
+      "type":"string",
+      "searchable":true,
+      "description":"It is the AtRisk Threshold, i.e.  2.0."
+    },
+    "itDevices":{
+      "type":"array",
+      "description":"IT Devices for this resource",
+      "items":{
+        "type":"object",
+        "properties":{
+          "isAdditive":{
+            "type":"string",
+			"description":"It is to find out if the IT Device is aditive, i.e.  The values are true or false",
+            "searchable":true
+          },
+          "deviceId":{
+            "type":"string",
+            "description":"The IT device to configure the PUE."
+          }          
+        }
+      }
+    },	
+    "facilityDevices":{
+      "type":"array",
+      "description":"Facility Devices for this resource",
+      "items":{
+        "type":"object",
+        "properties":{
+          "isAdditive":{
+            "type":"string",
+			"description":"It is to find out if the Facility Device is aditive, i.e.  The values are true or false",
+            "searchable":true
+          },
+          "deviceId":{
+            "type":"string",
+            "description":"The Facility device to configure the PUE."
+          }          
+        }
+      }
+    },	
+	"ownerId":{
+      "type":"string",
+      "searchable":true,
+      "description":"It is the PUE Owner ID, i.e.  Building ID."
+    },
+    "_links":{
+      "type":"object",
+      "description":"Hypermedia (HAL) links to self and other resources.",
+      "properties":{
+        "self":{
+          "description":"Hypermedia self link.",
+          "type":"string",
+          "format":"uri"
+        }
+      },
+      "required":[
+        "self",
+		"samplingFrequency",
+		"pueTarget",
+        "averagingPeriod"        
+      ]
+    }
+  }
+}

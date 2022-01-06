@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "DeviceAlarmSuppression.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The globally unique id of this resource.",
+        "readonly": true
+      },
+      "endScheduledTaskId": {
+        "type": "string",
+        "description": "The scheduled task id.",
+        "readonly": true
+      },
+      "startDateTime": {
+        "type": "string",
+        "description": "The start date time for the scheduled task."
+      },
+      "endDateTime": {
+        "type": "string",
+        "description": "The end date time for the scheduled task"
+      },
+      "alarmTypesIds" : {
+        "type": "array",
+        "description": "The alarm types Ids that are associated with the device"
+      }
+    }
+  }
+}

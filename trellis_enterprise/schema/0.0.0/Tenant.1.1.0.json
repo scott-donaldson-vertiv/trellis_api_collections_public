@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Tenant.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this tenant.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this tenant.",
+      "requiredOnCreate": true
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the tenant"
+    },
+    "username": {
+      "type": "string",
+      "description": "The name of the tenant administrator user"
+    },
+    "userEmail": {
+      "type": "string",
+      "description": "The email address of the tenant administrator user"
+    },
+
+    "parent": {
+      "type": "object",
+      "description": "The parent tenant of the current tenant",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the parent tenant"
+        }
+       }
+    }
+  }
+}

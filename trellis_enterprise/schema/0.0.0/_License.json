@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+
+        "licenseinfo": {
+            "id": "/properties/licenseinfo",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "activationID": {
+                    "id": "/properties/licenseinfo/properties/activationID",
+                    "type": "string"
+                },
+               "entitlementID": {
+                    "id": "/properties/licenseinfo/properties/entitlementID",
+                    "type": "string"
+                },
+                "activationCount": {
+                    "id": "/properties/licenseinfo/properties/activationCount",
+                    "type": "string"
+                },
+				"doesExpire": {
+                    "id": "/properties/licenseinfo/properties/doesExpire",
+                    "type": "string"
+                },
+				"expirationDate": {
+                    "id": "/properties/licenseinfo/properties/expirationDate",
+                    "type": "string"
+                },
+				"fulfillmentID": {
+                    "id": "/properties/licenseinfo/properties/fulfillmentID",
+                    "type": "string"
+                },
+				"fulfillmentType": {
+                    "id": "/properties/licenseinfo/properties/fulfillmentType",
+                    "type": "string"
+                },
+				"maintenance": {
+                    "id": "/properties/licenseinfo/properties/maintenance",
+                    "type": "string"
+                },
+				"name": {
+                    "id": "/properties/licenseinfo/properties/name",
+                    "type": "string"
+                },
+				"quantity": {
+                    "id": "/properties/licenseinfo/properties/quantity",
+                    "type": "string"
+                },
+				"version": {
+                    "id": "/properties/licenseinfo/properties/version",
+                    "type": "string"
+                }
+			}
+        }
+        
+    },
+    "type": "object"
+}

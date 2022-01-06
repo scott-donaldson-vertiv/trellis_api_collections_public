@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+
+        "umghistory": {
+            "id": "/properties/umghistory",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "engineVersion": {
+                    "id": "/properties/umghistory/properties/engineVersion",
+                    "type": "string"
+                },
+               "filename": {
+                    "id": "/properties/umghistory/properties/filename",
+                    "type": "string"
+                },
+                "os": {
+                    "id": "/properties/umghistory/properties/os",
+                    "type": "string"
+                },
+				"timestamp": {
+                    "id": "/properties/umghistory/properties/timestamp",
+                    "type": "string"
+                },
+				"accessDate": {
+                    "id": "/properties/umghistory/properties/accessDate",
+                    "type": "string"
+                },
+				"result": {
+                    "id": "/properties/umghistory/properties/result",
+                    "type": "string"
+                },
+				"historyType": {
+                    "id": "/properties/umghistory/properties/historyType",
+                    "type": "string"
+                }
+			}
+        }
+        
+    },
+    "type": "object"
+}

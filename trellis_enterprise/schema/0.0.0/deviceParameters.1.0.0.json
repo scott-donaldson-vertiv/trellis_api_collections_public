@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "deviceParameters.1.0.0",
+  "additionalProperties": false,
+  "description": "Device default collection rules parameters",
+  "type": "object",
+  "properties": {
+    "protocolTag": {
+      "type": "string",
+      "description": "The network protocol definition unique tag name",
+      "required": true
+    },
+    "openingId": {
+      "type": "string",
+      "description": "The device opening Id."
+    }
+    
+  }
+}

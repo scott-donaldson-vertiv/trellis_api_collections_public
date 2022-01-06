@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+
+        "managedDevices": {
+            "id": "/properties/managedDevices",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "name": {
+                    "id": "/properties/managedDevices/properties/name",
+                    "type": "string"
+                },
+               "category": {
+                    "id": "/properties/managedDevices/properties/category",
+                    "type": "string"
+                },
+                "ipAddress": {
+                    "id": "/properties/managedDevices/properties/ipAddress",
+                    "type": "string"
+                },
+				"location": {
+                    "id": "/properties/managedDevices/properties/location",
+                    "type": "string"
+                },
+				"protocol": {
+                    "id": "/properties/managedDevices/properties/protocol",
+                    "type": "string"
+                },
+				"state": {
+                    "id": "/properties/managedDevices/properties/state",
+                    "type": "string"
+                }
+			}
+        },
+	
+        "umgStatusDetails": {
+            "id": "/properties/umgStatusDetails",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "name": {
+                    "id": "/properties/umgStatusDetails/properties/name",
+                    "type": "string"
+                },
+               "category": {
+                    "id": "/properties/umgStatusDetails/properties/category",
+                    "type": "string"
+                },
+                "value": {
+                    "id": "/properties/umgStatusDetails/properties/value",
+                    "type": "string"
+                },
+				"convertedSymbol": {
+                    "id": "/properties/umgStatusDetails/properties/convertedSymbol",
+                    "type": "string"
+                },
+				"convertedValue": {
+                    "id": "/properties/umgStatusDetails/properties/convertedValue",
+                    "type": "string"
+                },
+				"measurementUnit": {
+                    "id": "/properties/umgStatusDetails/properties/measurementUnit",
+                    "type": "string"
+                },
+				"measurementUnitSymbol": {
+                    "id": "/properties/umgStatusDetails/properties/measurementUnitSymbol",
+                    "type": "string"
+                }
+			}
+        }
+    },
+    "type": "object"
+}

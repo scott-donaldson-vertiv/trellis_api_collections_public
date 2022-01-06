@@ -1,0 +1,2997 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Device.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "searchable": true,
+      "requiredOnCreate": true,
+      "description": "The name of this resource."
+    },
+    "comment": {
+      "type": "string",
+      "searchable": true,
+      "description": "Free form comment."
+    },
+    "displayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "searchable": true,
+      "readonly": true
+    },
+    "displayCategoryProgrammaticNameDisplay": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of this resource.",
+      "readonly": true
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of category programmatic names this resource belongs to, includes the display category.",
+      "readonly": true,
+      "searchable": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "description": "The programmatic name for this category that this resource belongs to",
+            "searchable": true
+          }
+        }
+      }
+    },
+    "owner": {
+      "type": "string",
+      "searchable": true,
+      "description": "Owner name of the resource, i.e. which user normally manages this resource."
+    },
+    "ownerEmail": {
+      "type": "string",
+      "description": "Email address of the owner to contact for this resource."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "recordCreateDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "searchable": true,
+      "readonly": true
+    },
+    "capacities": {
+      "type": "array",
+      "description": "Capacities for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "description": "The programmatic name of this capacity. This never changes and acts like a unique ID.",
+            "searchable": true,
+            "readonly": true
+          },
+          "programmaticNameDisplay": {
+            "type": "string",
+            "description": "The display string (localized) for this capacity.",
+            "readonly": true
+          },
+          "capacityValue": {
+            "type": "number",
+            "description": "The actual value of this capacity as stored in the database.",
+            "searchable": true
+          }
+        }
+      }
+    },
+    "userDefinedProperties": {
+      "type": "array",
+      "description": "User Defined Properties (UDP) for this resource.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "description": "Programmatic name of this UDP. This does not change and is used as the ID.",
+            "type": "string",
+            "searchable": true,
+            "readonly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the UDP as entered by the user. This value is not localized.",
+            "readonly": true
+          },
+          "udpValue": {
+            "type": "string",
+            "description": "The UDP value as a string.",
+            "searchable": true
+          },
+          "ownerTenantId": {
+            "type": "string",
+            "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+          },
+          "tenantIds": {
+            "type": "array",
+            "description": "List of tenant names that this resource is shared to.",
+            "items": {
+              "type": "string",
+              "description": "The tenant name that this resource is shared to"
+            }
+          },
+          "sharedTenancyOption": {
+            "type": "string",
+            "enum": [
+              "SHARED",
+              "ALL",
+              "NONE"
+            ],
+            "description": "Specify different shared tenancy options"
+          },
+          "udpType": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "FLOAT",
+              "INTEGER",
+              "LONG",
+              "BOOLEAN",
+              "BIGDECIMAL",
+              "TIME",
+              "DATE"
+            ],
+            "description": "The data type of the UDP value such as String, Float, Integer, Long, Boolean, Date(An ISO8601 format string), BigDecimal",
+            "readonly": true
+          }
+        }
+      }
+    },
+    "symbolVersion": {
+      "type": "string",
+      "description": "The version number of the symbols such as 12.3",
+      "readOnly": true
+    },
+    "typeIdentifierTag": {
+      "type": "string",
+      "description": "Unique tag copied from the Symbol to our instance. This relates the device to its symbol definition",
+      "readOnly": true,
+      "requiredOnCreate": true
+    },
+    "manufacturer": {
+      "type": "string",
+      "searchable": true,
+      "description": "Manufacturer of the device(obtained from the referenced symbol)."
+    },
+    "model": {
+      "type": "string",
+      "searchable": true,
+      "description": "Model of the device from the manufacturer(obtained from the referenced symbol)."
+    },
+    "modelQualifier": {
+      "type": "string",
+      "readonly": true,
+      "searchable": true,
+      "description": "Model Qualifier used to distinguish similar model numbers(obtained from the referenced symbol)."
+    },
+    "depth": {
+      "type": "number",
+      "description": "Depth of the physical object in inches (obtained from the referenced symbol)"
+    },
+    "height": {
+      "type": "number",
+      "description": "Height of the physical object in inches (obtained from the referenced symbol)"
+    },
+    "weight": {
+      "type": "number",
+      "description": "Weight of the physical object in lbs. (obtained from the referenced symbol)"
+    },
+    "width": {
+      "type": "number",
+      "description": "Width of the object in inches (obtained from the referenced symbol)"
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "assetNumber": {
+          "type": "string",
+          "searchable": true,
+          "description": "Asset number associated with the physical object"
+        },
+        "barCodeNumber": {
+          "type": "string",
+          "searchable": true,
+          "description": "Barcode Number associated with the physical object"
+        },
+        "serialNumber": {
+          "type": "string",
+          "searchable": true,
+          "description": "Serial Number associated with the physical object"
+        }
+      }
+    },
+    "rfid": {
+      "type": "string",
+      "searchable": true,
+      "description": "RFID tag for an object"
+    },
+    "rfidPosition": {
+      "type": "number",
+      "description": "The RU position(starting at top) on a multiple RU device"
+    },
+    "rackUPosition": {
+      "type": "number",
+      "readonly": true,
+      "description": "RackU position; If it is placed in a rack (see physical placement)"
+    },
+    "isPlaced": {
+      "type": "boolean",
+      "readonly": true,
+      "description": "Is the device is placed with a physical placement?"
+    },
+    "description": {
+      "type": "string",
+      "readonly": true,
+      "searchable": true,
+      "description": "Description of the device (obtained from the referenced symbol)."
+    },
+    "maintenanceMode": {
+      "type": "boolean",
+      "readonly": true,
+      "description": "Is the device currently in maintenance mode."
+    },
+    "productLine": {
+      "type": "string",
+      "searchable": true,
+      "description": "Manufacturer product line, such as Liebert NXL series(obtained from the referenced symbol)."
+    },
+    "location": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the device or container in the heirarchy, in the form of Enterprise->Building->Floor etc.."
+    },
+    "installDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "searchable": true,
+      "description": "The actual install date as entered, not the date it was created in the database."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "readonly": true,
+      "description": "Web Interface URI of the device if any, from symbol.(obtained from the referenced symbol)."
+    },
+    "deviceState": {
+      "type": "string",
+      "enum": [
+        "DEVICE_STATE_NORMAL",
+        "DEVICE_STATE_IN_MAINTENANCE_MODE",
+        "DEVICE_STATE_ALARM",
+        "DEVICE_STATE_NOT_RESPONDING"
+      ],
+      "description": "Overall Device State such as Normal, Alarm.",
+      "readonly": true
+    },
+    "monitoringState": {
+      "type": "string",
+      "enum": [
+        "MONITORING_STATE_ENABLED",
+        "MONITORING_STATE_DISABLED",
+        "MONITORING_STATE_PENDING",
+        "MONITORING_STATE_NA"
+      ],
+      "description": "Is the device being monitored enabled, disabled, pending, not-applicable.",
+      "readonly": true
+    },
+    "alarmStatus": {
+      "type": "string",
+      "enum": [
+        "NOALARM",
+        "INFORMATIONAL",
+        "WARNING",
+        "SEVERE",
+        "CRITICAL",
+        "UNKNOWN"
+      ],
+      "description": "Highest level alarm status reported against the device or children of the device.",
+      "searchable": true,
+      "readonly": true
+    },
+    "openings": {
+      "type": "array",
+      "description": "Array of device openings (ports, receptacles...) excluding slots.",
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "analogIO"
+                ],
+                "readonly": true
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name never changes and is used as an ID"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "readonly": true,
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "description": "The object side, left, front, back, right, etc the opening is on."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches xxxxxxx May be relitive to offset"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable..."
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and no additional connections can be made"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "ioDirection": {
+                "type": "string",
+                "enum": [
+                  "IO_INPUT",
+                  "IO_OUTPUT",
+                  "IO_BOTH"
+                ],
+                "description": "The direction of the IO opening, Input, Output, Both"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "enum": [
+                  "ANALOG"
+                ],
+                "readonly": true,
+                "description": "The configuration of the Opening either Analog, Digital or NotConfig"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "contactClosure"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "ioDirection": {
+                "type": "string",
+                "enum": [
+                  "IO_INPUT"
+                ],
+                "description": "The direction of the IO opening, Input, Output, Both"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "enum": [
+                  "DIGITAL"
+                ],
+                "readonly": true,
+                "description": "The configuration of the Opening either Analog, Digital or NotConfig"
+              },
+              "normalContactState": {
+                "type": "string",
+                "enum": [
+                  "CONTACT_STATE_NO",
+                  "CONTACT_STATE_NC"
+                ],
+                "description": "NormallyOpen or NormallyClosed"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "data"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "maxConnections": {
+                "type": "number",
+                "readonly": true,
+                "description": "Maximum number of connections allowed"
+              },
+              "media": {
+                "type": "string",
+                "enum": [
+                  "FIBRE",
+                  "COPPER",
+                  "OTHER"
+                ],
+                "description": "Media type of this port (e.g. fibre, copper, other)"
+              },
+              "portType": {
+                "type": "string",
+                "enum": [
+                  "SERIAL",
+                  "NETWORK",
+                  "STORAGE",
+                  "VIDEO",
+                  "AUDIO",
+                  "TELEPHONE"
+                ],
+                "description": "Port type( serial, network, storage, video, audio, telephone)"
+              },
+              "connectorType": {
+                "type": "string",
+                "readonly": true,
+                "description": "Connector type (RJ45, ST, SC, DB25...) possible types are read from a table"
+              },
+              "teaming": {
+                "type": "string",
+                "enum": [
+                  "DT_NONE",
+                  "DT_AUTO",
+                  "DT_DCHAN",
+                  "DT_SLB",
+                  "DT_TLB",
+                  "DT_NFT"
+                ],
+                "description": "Teaming mode (None, Auto,DualChannel,SLB,TLB,NFT)"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "digitalIO"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "ioDirection": {
+                "type": "string",
+                "enum": [
+                  "IO_INPUT",
+                  "IO_OUTPUT",
+                  "IO_BOTH"
+                ],
+                "description": "The direction of the IO opening, Input, Output, Both"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "enum": [
+                  "DIGITAL"
+                ],
+                "readonly": true,
+                "description": "The configuration of the Opening either Analog, Digital or NotConfig"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "power"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "numberOfLegs": {
+                "type": "number",
+                "readonly": true,
+                "description": "Number of power legs (1=line-neutral,2=line-line,3=3phase)"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "rackUnitRange"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label name of the opening"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "startRU": {
+                "type": "number",
+                "description": "The start rack unit number"
+              },
+              "heightRU": {
+                "type": "number",
+                "description": "Number of rack units to take"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "receptacle"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "numberOfLegs": {
+                "type": "number",
+                "description": "Number of power legs (1=line-neutral,2=line-line,3=3phase)"
+              },
+              "receptacleType": {
+                "type": "string",
+                "description": "The type of receptacle(NEMA-5, IEC-19...) The possible values are read from a table",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "universalIO"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "OID of the opening object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "connectedStatus": {
+                "type": "string",
+                "description": "The connection status of the opening. The value is always null."
+              },
+              "ioDirection": {
+                "type": "string",
+                "enum": [
+                  "IO_INPUT",
+                  "IO_OUTPUT",
+                  "IO_BOTH"
+                ],
+                "description": "The direction of the IO opening, Input, Output, Both"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "enum": [
+                  "ANALOG",
+                  "DIGITAL",
+                  "NOTCONFIG"
+                ],
+                "description": "The configuration of the Opening either Analog, Digital or NotConfig"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slots": {
+      "type": "array",
+      "description": "Array of slots in this device.",
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "slot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "bladeSlot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "powerSupplySlot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "readonly": true,
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "readonly": true,
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "ownerTenantId": {
+                "type": "string",
+                "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+              },
+              "tenantIds": {
+                "type": "array",
+                "description": "List of tenant names that this resource is shared to.",
+                "items": {
+                  "type": "string",
+                  "description": "The tenant name that this resource is shared to"
+                }
+              },
+              "sharedTenancyOption": {
+                "type": "string",
+                "enum": [
+                  "SHARED",
+                  "ALL",
+                  "NONE"
+                ],
+                "description": "Specify different shared tenancy options"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "enum": [
+                  "FRONT",
+                  "REAR",
+                  "LEFT",
+                  "RIGHT"
+                ],
+                "readonly": true,
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "readonly": true,
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "useability": {
+                "type": "string",
+                "description": "Extra comment added by the user, Bad, Unavailable are examples"
+              },
+              "comment": {
+                "type": "string",
+                "description": "Comment entered on the opening by a user"
+              },
+              "isLocked": {
+                "type": "boolean",
+                "description": "True if an opening is locked and a user cannot make any additional connections to it"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    "physicalPlacement": {
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inBuilding"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inSpace"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "xOffset": {
+              "type": "number",
+              "description": "X offset relative to the upper left corner of the space, optional"
+            },
+            "yOffset": {
+              "type": "number",
+              "description": "Y offset relative to the upper left corner of the space, optional"
+            },
+            "zorder": {
+              "type": "number",
+              "description": "When device occupy the same coordinates, then they are placed on top of each other"
+            },
+            "rotation": {
+              "type": "number",
+              "description": "The rotation of the device, in degrees, relitive to the normal orientation"
+            },
+            "levelProgrammaticName": {
+              "type": "string",
+              "enum": [
+                "DROP-CEILING",
+                "FLOOR",
+                "RAISED-FLOOR",
+                "CEILING"
+              ],
+              "description": "Programmatic name of the level of the space this is placed at",
+              "requiredOnCreate": true
+            },
+            "levelProgrammaticNameDisplay": {
+              "type": "string",
+              "description": "Programmatic display name of the level of the space this is placed at",
+              "readonly": true
+            },
+            "zOffset": {
+              "type": "number",
+              "description": "zOffset (distance in inches) the device is placed from the level (floor, ceiling).  Can be positive or negative. "
+            },
+            "gridTileXOffset": {
+              "type": "number",
+              "description": "X coordinate of the Grid name to report"
+            },
+            "gridTileYOffset": {
+              "type": "number",
+              "description": "Y coordinate of the Grid name to report"
+            },
+            "gridTileName": {
+              "type": "string",
+              "description": "name of the Grid to report"
+            },
+            "gridTileLocation": {
+              "type": "string",
+              "description": "Location of the Grid to report"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inDatacenter"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inEnclosure"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "location": {
+              "type": "string",
+              "description": "Where on the enclosure the device is placed"
+            },
+            "depthFromFront": {
+              "type": "number",
+              "description": "Depth from the front of the enclosure"
+            },
+            "rotation": {
+              "type": "number",
+              "description": "Rotation of the device, in degrees, with respect to the enclosure"
+            },
+            "frontFacing": {
+              "type": "boolean",
+              "description": "True if this is front facing device or rear exposed"
+            },
+            "xOffset": {
+              "type": "number",
+              "description": "X offset relative to the lower left corner of the device"
+            },
+            "yOffset": {
+              "type": "number",
+              "description": "Y offset relative to the lower left corner of the device"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "onFloor"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "xOffset": {
+              "type": "number",
+              "description": "X offset relative to the upper left corner of the floor, optional"
+            },
+            "yOffset": {
+              "type": "number",
+              "description": "Y offset relative to the upper left corner of the floor, optional"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inDevice"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "onDevice"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "xOffset": {
+              "type": "number",
+              "description": "X offset relative to the lower left corner of the device"
+            },
+            "yOffset": {
+              "type": "number",
+              "description": "Y offset relative to the lower left corner of the device"
+            },
+            "zorder": {
+              "type": "number",
+              "description": "Order of this object, when devices are stacked upon each other"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inPanel"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "firstPosition": {
+              "type": "number",
+              "description": "First position this breaker takes up in the panel",
+              "requiredOnCreate": true
+            },
+            "numOfPositions": {
+              "type": "number",
+              "description": "Number of positions taken by this breaker. (Should be same as number of poles on the device)",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "onPowerRail"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "ordinal": {
+              "type": "number",
+              "description": "Location of the device on the rail",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inRack"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "side": {
+              "type": "string",
+              "description": "Which side of the rack the device is placed, front or rear",
+              "requiredOnCreate": true
+            },
+            "rotation": {
+              "type": "number",
+              "description": "Is the rotation of the device in the rack, normally 0",
+              "requiredOnCreate": true
+            },
+            "frontFacing": {
+              "type": "boolean",
+              "description": "Is the device front facing or is the rear showing",
+              "requiredOnCreate": true
+            },
+            "uPosition": {
+              "type": "number",
+              "description": "The RU position of the device in the rack",
+              "requiredOnCreate": true
+            },
+            "xPosition": {
+              "type": "number",
+              "description": "If the device is smaller then the width, how far from the left rail",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "onShelf"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "xOffset": {
+              "type": "number",
+              "description": "X offset that the device is placed at"
+            },
+            "yOffset": {
+              "type": "number",
+              "description": "Y offset that the device is placed at"
+            },
+            "zorder": {
+              "type": "number",
+              "description": "Zorder information"
+            },
+            "rotation": {
+              "type": "number",
+              "description": "Rotation on the shelf, in degrees, as viewed from the front"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inSlot"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "slotIds": {
+              "type": "array",
+              "description": "Array containing the slot ids in which this device is going to be placed",
+              "requiredOnCreate": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "rotation": {
+              "type": "number",
+              "description": "Rotation, in degrees, as compared to normal orientation(as defined in symbol)",
+              "requiredOnCreate": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "requiredOnCreate": true,
+              "enum": [
+                "inZeroU"
+              ]
+            },
+            "parentObjectOid": {
+              "type": "string",
+              "requiredOnCreate": true
+            },
+            "location": {
+              "type": "string",
+              "description": "Location or rail in Zero U the device is placed",
+              "requiredOnCreate": true
+            },
+            "uHeight": {
+              "type": "number",
+              "description": "The U height that the device is placed on a rail",
+              "requiredOnCreate": true
+            },
+            "xPosition": {
+              "type": "number",
+              "description": "If the device is located some distance off the rail"
+            },
+            "rotation": {
+              "type": "number",
+              "description": "If the device is rotated off it normal position in degrees",
+              "requiredOnCreate": true
+            },
+            "zOrder": {
+              "type": "number",
+              "description": "If the devices are stacked on top of each other, this is the order"
+            },
+            "frontFacing": {
+              "type": "boolean",
+              "description": "Set true if the device front of the device is shown"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "This property allows a device to be unplaced. Note that a breaker or breaker panel cannot be moved.",
+              "enum": [
+                "unplaced"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "specificProperties": {
+      "type": "object",
+      "description": "The device specific extensions for this device",
+      "properties": {
+        "assetController": {
+          "type": "object",
+          "properties": {
+            "sensorMount": {
+              "type": "string",
+              "description": "Is the asset controller sensor mounted in the front or rear"
+            }
+          }
+        },
+        "branchBreaker": {
+          "type": "object",
+          "properties": {
+            "tripCurrentAmps": {
+              "type": "number",
+              "description": "Trip current in amps"
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps. If not specified during creation a default value of 80 will be used",
+              "searchable": true
+            },
+            "useType": {
+              "type": "string",
+              "enum": [
+                "BRANCH"
+              ],
+              "readonly": true,
+              "description": "Breaker use type = BRANCH."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "readonly": true,
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the Panel, Pull-out or Fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "card": {
+          "type": "object",
+          "properties": {
+            "numSlotsWide": {
+              "type": "number",
+              "description": "Number of slots wide",
+              "readonly": true
+            },
+            "numSlotsHigh": {
+              "type": "number",
+              "description": "Number of slots high",
+              "readonly": true
+            }
+          }
+        },
+        "crac": {
+          "type": "object",
+          "properties": {
+            "ratedEnteringAirTemp": {
+              "type": "number",
+              "readonly": true,
+              "description": "Entering air temperature, Degrees F",
+              "searchable": true
+            },
+            "ratedEnteringEvaporaterTemp": {
+              "type": "number",
+              "readonly": true,
+              "description": "Rated temp entering Evaporater, Degrees F",
+              "searchable": true
+            },
+            "ratedCapacity": {
+              "type": "number",
+              "readonly": true,
+              "description": "Rated Capacity in BTU's",
+              "searchable": true
+            },
+            "designedCapacity": {
+              "type": "number",
+              "description": "Design Capacity in BTU's",
+              "searchable": true
+            }
+          }
+        },
+        "crah": {
+          "type": "object",
+          "properties": {
+            "ratedEnteringAirTemp": {
+              "type": "number",
+              "readonly": true,
+              "description": "Entering air temperature, Degrees F",
+              "searchable": true
+            },
+            "ratedEnteringWaterTemp": {
+              "type": "number",
+              "readonly": true,
+              "description": "Rated temp water temperature, Degrees F",
+              "searchable": true
+            },
+            "ratedCapacity": {
+              "type": "number",
+              "readonly": true,
+              "description": "Rated Capacity in BTU's",
+              "searchable": true
+            },
+            "designedCapacity": {
+              "type": "number",
+              "description": "Design Capacity in BTU's",
+              "searchable": true
+            }
+          }
+        },
+        "lowVoltageBreaker": {
+          "type": "object",
+          "properties": {
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps",
+              "searchable": true
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "lowVoltageIsolator": {
+          "type": "object",
+          "properties": {
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed",
+              "searchable": true
+            }
+          }
+        },
+        "lowVoltageSwitch": {
+          "type": "object",
+          "properties": {
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "mainBreaker": {
+          "type": "object",
+          "properties": {
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps",
+              "searchable": true
+            },
+            "useType": {
+              "type": "string",
+              "enum": [
+                "MAIN_PANEL"
+              ],
+              "readonly": true,
+              "description": "Breaker use type = MAIN_PANEL."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has.",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "mediumVoltageBreaker": {
+          "type": "object",
+          "properties": {
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps",
+              "searchable": true
+            },
+            "useType": {
+              "type": "[string, null]",
+              "readonly": true,
+              "description": "Breaker use type will always be null for mediumVoltageBreaker"
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "mediumVoltageSwitch": {
+          "type": "object",
+          "properties": {
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            }
+          }
+        },
+        "breakerPanel": {
+          "type": "object",
+          "properties": {
+            "panelRatingAmps": {
+              "type": "number",
+              "description": "Rated current for the panel in Amps.",
+              "requiredOnCreate": true,
+              "searchable": true
+            },
+            "numberOfBreakerPositions": {
+              "type": "number",
+              "description": "Number of breaker positions supported in this panel.",
+              "requiredOnCreate": true,
+              "searchable": true
+            },
+            "panelStyle": {
+              "type": "string",
+              "description": "Single line or dual line of breakers.",
+              "requiredOnCreate": true,
+              "searchable": true
+            },
+            "panelType": {
+              "type": "string",
+              "enum": [
+                "SUBFEED",
+                "REMOTE"
+              ],
+              "description": "Panel Type (Subfeed or Remote)",
+              "requiredOnCreate": true,
+              "searchable": true
+            },
+            "safetyFactor": {
+              "type": "number",
+              "description": "Saftey factor, usually a pecentage of the overall amp rating"
+            }
+          }
+        },
+        "pdu": {
+          "type": "object",
+          "properties": {
+            "nominalInputVolts": {
+              "type": "number",
+              "description": "Nominal input voltage",
+              "readonly": true,
+              "searchable": true
+            },
+            "nominalOutputVolts": {
+              "type": "number",
+              "description": "Nominal Output voltage",
+              "readonly": true,
+              "searchable": true
+            },
+            "numberOfFeeds": {
+              "type": "number",
+              "description": "Number of feeds for the PDU (usually 1 or 2)",
+              "readonly": true,
+              "searchable": true
+            }
+          }
+        },
+        "powerConsumer": {
+          "type": "object",
+          "properties": {
+            "wattLoadFaceplate": {
+              "type": "number",
+              "description": "The load of the device based on the faceplate data, in watts",
+              "searchable": true
+            },
+            "wattLoadDerated": {
+              "type": "number",
+              "description": "The load of the device based on the data derated by the user, in watts",
+              "searchable": true
+            },
+            "minNumberOfConnections": {
+              "type": "number",
+              "readonly": true,
+              "description": "Minimum number of power connection this device requires"
+            },
+            "powerFactor": {
+              "type": "number",
+              "description": "Power factor of the consumer, defaults to 0.97"
+            },
+            "inputVoltage": {
+              "type": "number",
+              "description": "Input voltage of the consumer",
+              "searchable": true
+            },
+            "currentNumberOfPhases": {
+              "type": "number",
+              "description": "Current number of phases for the consumer, depends on upstream connections",
+              "searchable": true
+            },
+            "peakInterval": {
+              "type": "number",
+              "description": "This will hold the value of peak interval."
+            },
+            "peakIntervalUnit": {
+              "type": "string",
+              "enum": [
+                "SECOND",
+                "MINUTE",
+                "HOUR",
+                "DAY",
+                "MONTH",
+                "YEAR"
+              ],
+              "description": "The enum values for the enum are SECOND,MINUTE,HOUR,DAY, MONTH, YEAR"
+            },
+            "peakPowerStartDate": {
+              "type": "string",
+              "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+              "description": "Power Start Date"
+            }
+          }
+        },
+        "powerDistributor": {
+          "type": "object",
+          "properties": {
+            "numberOfPhases": {
+              "type": "number",
+              "readonly": true,
+              "description": "number of phases that the Distributor handles on the input"
+            },
+            "numberOfLegs": {
+              "type": "number",
+              "readonly": true,
+              "description": "Number of legs for power on the input ( 1, 2 or 3)"
+            },
+            "loadSafetyFactor": {
+              "type": "number",
+              "description": "Percentage rating of the load versus max current or power"
+            },
+            "powerMaxOutputWatts": {
+              "type": "number",
+              "readonly": true,
+              "description": "Max amount of power for devices rated in Watts, such as Generators, UPS's.",
+              "searchable": true
+            },
+            "powerMaxOutputAmps": {
+              "type": "number",
+              "readonly": true,
+              "description": "Max power in Amps for current rated devices such as PDU's, Breaker Panels",
+              "searchable": true
+            },
+            "inputVoltage": {
+              "type": "number",
+              "description": "Input voltage to the distributor",
+              "searchable": true
+            },
+            "outputVoltage": {
+              "type": "number",
+              "description": "Output voltage from the distributor, maybe different for distributors that have XFormers",
+              "searchable": true
+            },
+            "powerMaxOutputUnits": {
+              "type": "string",
+              "readonly": true,
+              "enum": [
+                "AMPS",
+                "WATTS"
+              ],
+              "description": "Which power unit to use Amps or Watts"
+            },
+            "peakInterval": {
+              "type": "number",
+              "description": "This will hold the value of peak interval."
+            },
+            "numberOfFeeds": {
+              "type": "number",
+              "readonly": true,
+              "description": "Number of feeds",
+              "searchable": true
+            },
+            "peakIntervalUnit": {
+              "type": "string",
+              "enum": [
+                "SECOND",
+                "MINUTE",
+                "HOUR",
+                "DAY",
+                "MONTH",
+                "YEAR"
+              ],
+              "description": "Time Unit for Interval (SECOND, MINUTE, HOUR,DAY, MONTH, YEAR)"
+            },
+            "faceplateWattsPhaseA": {
+              "type": "number",
+              "description": "faceplace watts for Phase A or leg 1"
+            },
+            "faceplateWattsPhaseB": {
+              "type": "number",
+              "description": "faceplace watts for Phase B or leg 2"
+            },
+            "faceplateWattsPhaseC": {
+              "type": "number",
+              "description": "faceplace watts for Phase C or leg 3"
+            },
+            "deratedWattsPhaseA": {
+              "type": "number",
+              "description": "derated Watts Phase A"
+            },
+            "deratedWattsPhaseB": {
+              "type": "number",
+              "description": "derated Watts Phase B"
+            },
+            "deratedWattsPhaseC": {
+              "type": "number",
+              "description": "derated Watts Phase C"
+            },
+            "faceplateAmpsPhaseA": {
+              "type": "number",
+              "description": "Faceplate Amps Phase A"
+            },
+            "faceplateAmpsPhaseB": {
+              "type": "number",
+              "description": "Faceplate Amps Phase B"
+            },
+            "faceplateAmpsPhaseC": {
+              "type": "number",
+              "description": "Faceplate Amps Phase C"
+            },
+            "deratedAmpsPhaseA": {
+              "type": "number",
+              "description": "derated Amps Phase A"
+            },
+            "deratedAmpsPhaseB": {
+              "type": "number",
+              "description": "derated Amps Phase B"
+            },
+            "deratedAmpsPhaseC": {
+              "type": "number",
+              "description": "derated Amps Phase C"
+            },
+            "faceplateKVAPhaseA": {
+              "type": "number",
+              "description": "faceplate KVA Phase A"
+            },
+            "faceplateKVAPhaseB": {
+              "type": "number",
+              "description": "faceplate KVA Phase B"
+            },
+            "faceplateKVAPhaseC": {
+              "type": "number",
+              "description": "faceplate KVA Phase C"
+            },
+            "deratedKVAPhaseA": {
+              "type": "number",
+              "description": "derated KVA Phase A"
+            },
+            "deratedKVAPhaseB": {
+              "type": "number",
+              "description": "derated KVA Phase B"
+            },
+            "deratedKVAPhaseC": {
+              "type": "number",
+              "description": "derated KVA Phase C"
+            },
+            "peakPowerStartDate": {
+              "type": "string",
+              "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+              "description": "Peak Power Start date"
+            },
+            "peakIntervalUnits": {
+              "type": "string",
+              "enum": [
+                "SECOND",
+                "MINUTE",
+                "HOUR",
+                "DAY",
+                "MONTH",
+                "YEAR"
+              ],
+              "description": "Peak capacity Interval units"
+            }
+          }
+        },
+        "powerMeter": {
+          "type": "object",
+          "properties": {
+            "readingSource": {
+              "type": "string",
+              "enum": [
+                "MANUAL",
+                "REALTIME"
+              ],
+              "description": "This field indicates whether source of reading is Manual/RealTime."
+            },
+            "powerDeliveryContract": {
+              "type": "object",
+              "description": "ID of Object with power delivery contract details.",
+              "properties": {
+                "billingStartDay": {
+                  "type": "number",
+                  "description": "The day of the month or week that billing starts."
+                },
+                "billingCurrency": {
+                  "type": "string",
+                  "description": "Related currency of bill in ISO 4217 standard code"
+                },
+                "billingFrequency": {
+                  "type": "string",
+                  "enum": [
+                    "WEEKLY",
+                    "MONTHLY"
+                  ],
+                  "description": "Frequency of billing can be weekly or monthly"
+                }
+              }
+            }
+          }
+        },
+        "rack": {
+          "type": "object",
+          "properties": {
+            "insideHeight": {
+              "type": "number",
+              "description": "Inside height of the rack opening, in inches",
+              "readonly": true
+            },
+            "insideWidth": {
+              "type": "number",
+              "description": "Inside width of the rack opening, in inches",
+              "readonly": true
+            },
+            "insideDepth": {
+              "type": "number",
+              "description": "Inside depth of the rack opening, in inches",
+              "readonly": true
+            },
+            "bottomRUOffsetX": {
+              "type": "number",
+              "description": "The distance in inches of the X offset from outside dimensions to opening",
+              "readonly": true
+            },
+            "bottomRUOffsetY": {
+              "type": "number",
+              "description": "The distance in inches of the Y offset from outside dimensions to opening",
+              "readonly": true
+            },
+            "weightBearingCapacity": {
+              "type": "number",
+              "description": "How much weight can the rack hold in Lb",
+              "readonly": true
+            },
+            "startingRU": {
+              "type": "number",
+              "description": "Starting RU of the rack opening, usually 0 or 1"
+            },
+            "isRuScaleTopDown": {
+              "type": "boolean",
+              "description": "Set true if the Rack scale starts at the top, false if it starts at the bottom"
+            },
+            "availableRackSpacesFront": {
+              "type": "array",
+              "readonly": true,
+              "items": {
+                "startRu": {
+                  "type": "number",
+                  "readonly": true
+                },
+                "heightRu": {
+                  "type": "number",
+                  "readonly": true
+                }
+              }
+            },
+            "availableRackSpacesRear": {
+              "type": "array",
+              "readonly": true,
+              "items": {
+                "startRu": {
+                  "type": "number",
+                  "readonly": true
+                },
+                "heightRu": {
+                  "type": "number",
+                  "readonly": true
+                }
+              }
+            }
+          }
+        },
+        "roomCoolingProvider": {
+          "type": "object",
+          "properties": {
+            "heatDissipated": {
+              "type": "number",
+              "readonly": true,
+              "description": "Amount of heat dissipated by the cooler, can be negative",
+              "searchable": true
+            },
+            "cfmRating": {
+              "type": "number",
+              "readonly": true,
+              "description": "The rating of the fan in Cubic Feet Per Minute",
+              "searchable": true
+            },
+            "peakInterval": {
+              "type": "number",
+              "description": "This will hold the value of peak interval."
+            },
+            "peakIntervalUnits": {
+              "type": "string",
+              "enum": [
+                "SECOND",
+                "MINUTE",
+                "HOUR",
+                "DAY",
+                "MONTH",
+                "YEAR"
+              ],
+              "description": "The peak interval unit (SECOND,MINUTE,HOUR,DAY, MONTH, YEAR)"
+            },
+            "peakCoolingStartDate": {
+              "type": "string",
+              "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+              "description": "The peak interval Start Date"
+            }
+          }
+        },
+        "rpp": {
+          "type": "object",
+          "properties": {
+            "panelConnectType": {
+              "type": "string",
+              "readonly": true,
+              "description": "Panel Connect Type (comes from the symbol)",
+              "searchable": true
+            },
+            "rppType": {
+              "type": "string",
+              "readonly": true,
+              "description": "Rpp Type (comes from the symbol)",
+              "searchable": true
+            }
+          }
+        },
+        "server": {
+          "type": "object",
+          "properties": {
+            "numberOfProcessors": {
+              "type": "number",
+              "description": "Number of processors in this server",
+              "searchable": true
+            }
+          }
+        },
+        "subfeedBreaker": {
+          "type": "object",
+          "properties": {
+            "tripCurrentAmps": {
+              "type": "number",
+              "description": "Trip current in amps"
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps",
+              "searchable": true
+            },
+            "useType": {
+              "type": "string",
+              "enum": [
+                "SUBFEED"
+              ],
+              "readonly": true,
+              "description": "Breaker use types for MAINPANEL, SUBFEED, BRANCH."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps",
+              "searchable": true
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has (1, 2 or 3).",
+              "searchable": true
+            },
+            "mountType": {
+              "type": "string",
+              "enum": [
+                "BREAKER_MOUNT_FIXED",
+                "BREAKER_MOUNT_DRAW_OUT",
+                "BREAKER_MOUNT_PANEL"
+              ],
+              "description": "How the breaker is mounted in the panel, pull out or fixed.",
+              "searchable": true
+            },
+            "hasNeutral": {
+              "type": "boolean",
+              "description": "Does the subfeed breaker have a neutral line"
+            }
+          }
+        },
+        "transferSwitch": {
+          "type": "object",
+          "properties": {
+            "switchName": {
+              "type": "string",
+              "description": "Switch name",
+              "searchable": true
+            }
+          }
+        }
+      }
+    },
+    "alarmCounts": {
+      "type": "object",
+      "description": "The counts for critical, warning, normal and total alarms for this device.",
+      "properties": {
+        "criticalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with critical severity for this device.",
+          "readonly": true
+        },
+        "warningAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with warning severity for this device.",
+          "readonly": true
+        },
+        "normalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with normalseverity for this device.",
+          "readonly": true
+        },
+        "totalAlarmCount": {
+          "type": "integer",
+          "description": "The total number of alarms for this device.",
+          "readonly": true
+        }
+      }
+    },
+    "monitoringConfiguration": {
+      "type": "object",
+      "description": "An object containing all of he monitoring configurations for this device",
+      "properties": {
+        "ipAddresses": {
+            "type": "array",
+            "description": "The IP Addresses where this device is being monitored",
+            "items": {
+                "type": "string"
+            }
+        },
+        "monitoringApplianceIpAddress": {
+            "type": "string",
+            "description": "The IP Address of the monitoring appliance"
+        },
+        "monitoringApplianceId": {
+            "type": "string",
+            "description": "The ID of the monitoring appliance"
+        },
+        "monitoringApplianceName": {
+            "type": "string",
+            "description": "The name of the monitoring appliance"
+        },
+        "controllerIpAddress": {
+            "type": "string",
+            "description": "The IP Address of the controller"
+        },
+        "controllerId": {
+            "type": "string",
+            "description": "The ID of the controller"
+        },
+        "elementLibraryId": {
+            "type": "string",
+            "description": "The ID of the Element Library"
+        },
+        "elementLibraryProductLineName": {
+            "type": "string",
+            "description": "The Product Line Name of the Element Library"
+        },
+        "elementLibraryProductLineVersion": {
+            "type": "string",
+            "description": "The Product Line Version Number of the Element Library"
+        },
+        "protocolProgrammaticName": {
+            "type": "string",
+            "description": "The protocol to communicate on"
+        },
+        "communicationParameters": {
+            "type": "object",
+            "description": "Parameters for communication",
+            "properties": {
+                "PORT": {
+                  "type": "string",
+                  "description": "Port to communicate on"
+                },
+                "READCOMMUNITY": {
+                  "type": "string",
+                  "description": "The Read Community for communication"
+                },
+                "WRITECOMMUNITY": {
+                  "type": "string",
+                  "description": "The Read Community for communication"
+                },
+                "TIMEOUT": {
+                  "type": "string",
+                  "description": "Timeout in seconds for communication"
+                }
+            }
+        },
+        "statusPollingInterval": {
+            "type": "object",
+            "description": "Status polling interval properties",
+            "properties": {
+                "datapointProgrammaticName": {
+                  "type": "string",
+                  "description": "The programmatic name of the datapoint used for status"
+                },
+                "interval": {
+                  "type": "string",
+                  "description": "The interval in seconds for status polling"
+                }
+            }
+        },
+        "datapointPollingIntervals": {
+            "type": "array",
+            "description": "Polling intervals for specific datapoints",
+            "items": {
+				"type": "object",
+                "properties": {
+                    "pollingEnabled": {
+                        "type": "boolean",
+                        "description": "True if polling is to be done for this datapoint"
+                    },
+                    "dataPointDefinitionId": {
+                        "type": "string",
+                        "readonly": true,
+                        "description": "The ID of the datapoint being polled"
+                    },
+                    "dataPointDefinitionName": {
+                        "type": "string",
+                        "readonly": true,
+                        "description": "The name of the datapoint being polled"
+                    },
+                    "dataPointDefinitionDescription": {
+                        "type": "string",
+                        "readonly": true,
+                        "description": "The description of the datapoint being polled"
+                    },
+                    "pollingInterval": {
+                        "type": "number",
+                        "description": "The polling interval in the units of the interval"
+                    },
+                    "pollingIntervalUnit": {
+                        "enum": [
+                            "MILLISECONDS",
+                            "SECONDS",
+                            "MINUTES",
+                            "HOURS"
+                        ]
+                    }
+                }
+            }
+          }
+        }
+     },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "type": "object",
+          "description": "Hypermedia self link.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "symbol": {
+          "type": "object",
+          "description": "Hypermedia link for the symbol image.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "devices": {
+          "type": "object",
+          "description": "Hypermedia link to child devices collection.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "description": "Hypermedia link for the device image.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "parents": {
+          "type": "object",
+          "description": "Hypermedia link to parent containers collection.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "powerDeliveryContract": {
+          "type": "object",
+          "description": "Hypermedia link to the contract object with details.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "placementParent": {
+          "type": "object",
+          "description": "Hypermedia link to the object this device is placed in.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "logicalPlacements": {
+          "type": "object",
+          "description": "Hypermedia link to a collection of logical placements.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "_links",
+    "capacities",
+    "userDefinedProperties"
+  ]
+}

@@ -1,0 +1,2167 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Symbol.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the symbol, from the symbols development team.",
+      "readonly": true
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "recordCreateDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "readonly": true
+    },
+    "displayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "readonly": true
+    },
+    "displayCategoryProgrammaticNameDisplay": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of this resource.",
+      "readonly": true
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of category programmatic names this resource belongs to, includes the display category",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "symbolMajorVersion": {
+      "type": "string",
+      "description": "Symbol major version number.",
+      "readonly": true
+    },
+    "symbolMinorVersion": {
+      "type": "string",
+      "description": "Symbol minor version number.",
+      "readonly": true
+    },
+    "typeIdentifierTag": {
+      "type": "string",
+      "description": "Unique tag copied from the Symbol to our instance.",
+      "readonly": true
+    },
+    "manufacturer": {
+      "type": "string",
+      "readonly": true,
+      "description": "Manufacturer of the device."
+    },
+    "model": {
+      "type": "string",
+      "readonly": true,
+      "description": "Model of the device from the manufacturer."
+    },
+    "modelQualifier": {
+      "type": "string",
+      "readonly": true,
+      "description": "Model Qualifier used to distinguish similar model numbers."
+    },
+    "isHiddenSymbol": {
+      "type": "boolean",
+      "readonly": true,
+      "description": "Symbols that should be not be displayed in catalog."
+    },
+    "depth": {
+      "type": "number",
+      "readonly": true,
+      "description": "Depth of the physical object in inches (obtained from the referenced symbol)"
+    },
+    "height": {
+      "type": "number",
+      "readonly": true,
+      "description": "Height of the physical object in inches (obtained from the referenced symbol)"
+    },
+    "weight": {
+      "type": "number",
+      "readonly": true,
+      "description": "weight of the physical object in lbs. (obtained from the referenced symbol)"
+    },
+    "width": {
+      "type": "number",
+      "readonly": true,
+      "description": "Width of the object in inches (obtained from the referenced symbol)"
+    },
+    "productLine": {
+      "type": "string",
+      "readonly": true,
+      "description": "Manufacturer product line, such as Libert NLX series(obtained from the referenced symbol)."
+    },
+    "openings": {
+      "type": "array",
+      "description": "Array of device openings (ports, receptacles...) associated with the resource. All opening properties are read only.",
+      "readonly": true,
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "analogIO"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "ioDirection": {
+                "type": "string",
+                "description": "The direction of the IO opening"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "description": "The configuration of the Opening. The value can be either Analog, Digital, or NotConfig."
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "contactClosure"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "ioDirection": {
+                "type": "string",
+                "description": "The direction of the IO opening"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "description": "The configuration of the Opening. The value can be either Analog, Digital, or NotConfig."
+              },
+              "normalContactState": {
+                "type": "string",
+                "description": "Normally open or normally closed"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "data"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "maxConnections": {
+                "type": "number",
+                "description": "Maximum number of connections allowed"
+              },
+              "media": {
+                "type": "string",
+                "description": "Media type of this port (e.g. FIBRE, COPPER, or OTHER.). "
+              },
+              "connectorType": {
+                "type": "string",
+                "description": "Connector type (RJ45, ST, SC, DB25...)"
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "digitalIO"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "ioDirection": {
+                "type": "string",
+                "description": "The direction of the IO opening"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "description": "The configuration of the Opening. The value can be either Analog, Digital, or NotConfig."
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "power"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "numberOfLegs": {
+                "type": "number",
+                "description": "Number of power legs"
+              },
+              "legs": {
+                "type": "array",
+                "description": "A list of power leg numbers associated wth the opening.",
+                "items": {
+                  "type": "number",
+                  "description": "A power leg number."
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "powerRail"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "numberOfLegs": {
+                "type": "number",
+                "description": "Number of power legs"
+              },
+              "legs": {
+                "type": "array",
+                "description": "A list of power leg numbers associated wth the opening.",
+                "items": {
+                  "type": "number",
+                  "description": "A power leg number."
+                }
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "receptacle"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "numberOfLegs": {
+                "type": "number",
+                "description": "Number of power legs"
+              },
+              "legs": {
+                "type": "array",
+                "description": "A list of power leg numbers associated wth the opening.",
+                "items": {
+                  "type": "number",
+                  "description": "A power leg number."
+                }
+              },
+              "receptacleType": {
+                "type": "string",
+                "description": "The type of receptacle(NEMA-5, IEC-19...)",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "universalIO"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "ioDirection": {
+                "type": "string",
+                "description": "The direction of the IO opening"
+              },
+              "analogOrDigitalConfig": {
+                "type": "string",
+                "description": "The configuration of the Opening. The value can be either Analog, Digital, or NotConfig."
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "fluid"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "OID of the object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "isInternalToDevice": {
+                "type": "boolean",
+                "description": "Specifies whether the opening is internal to a device."
+              },
+              "connectionType": {
+                "type": "string",
+                "description": "The connection type of the opening. This type can be either Thread, Solder, Crimp, or Other."
+              },
+              "diameter": {
+                "type": "number",
+                "description": "The diameter of the opening."
+              }
+            }
+          }
+        ]
+      }
+    },
+    "slots": {
+      "type": "array",
+      "description": "Array of slots in the device associated with symbol. All slot properties are read only.",
+      "readonly": true,
+      "items": {
+        "anyOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "slot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "bladeSlot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "powerSupplySlot"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "ID of the slot object"
+              },
+              "programmaticName": {
+                "type": "string",
+                "description": "Programmatic name for the opening, this name is fixed and never changes"
+              },
+              "label": {
+                "type": "string",
+                "description": "Label external name of the opening, defaults to the label from the symbol or progrmmatic name"
+              },
+              "side": {
+                "type": "string",
+                "description": "The object side, left, front, back, right, etc."
+              },
+              "xOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the XOffset of the opening, in inches"
+              },
+              "yOffset": {
+                "type": "number",
+                "description": "For drawing purposes, the YOffset of the opening, in inches"
+              },
+              "top": {
+                "type": "number",
+                "description": "For drawing purposes, the Top of the opening, in inches"
+              },
+              "bottom": {
+                "type": "number",
+                "description": "For drawing purposes, the Bottom of the opening, in inches"
+              },
+              "left": {
+                "type": "number",
+                "description": "For drawing purposes, the Left of the opening, in inches"
+              },
+              "right": {
+                "type": "number",
+                "description": "For drawing purposes, the Right of the opening, in inches"
+              },
+              "slotTypeProgrammaticName": {
+                "type": "string",
+                "description": "Programmatic name for the Slot type, such as Blade or Other",
+                "readonly": true
+              },
+              "slotTypeProgrammaticNameDisplay": {
+                "type": "string",
+                "description": "Name for the Slot type, such as Blade or Other",
+                "readonly": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    "specificProperties": {
+      "type": "object",
+      "description": "The device specific extensions for the device associated with symbol. All device specific extension properties are read only.",
+      "readonly": true,
+      "properties": {
+        "assetController": {
+          "type": "object",
+          "description": "The device extension information for devices that are asset controllers.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            }
+          }
+        },
+        "branchBreaker": {
+          "type": "object",
+          "description": "The device extension information for branch breakers.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps"
+            },
+            "interruptRating": {
+              "type": "number",
+              "description": "The rating in amps at which the breaker will trip or interrupt."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "card": {
+          "type": "object",
+          "description": "The device extension information for cards such as Blade servers and PC cards.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "numSlotsWide": {
+              "type": "number",
+              "description": "Number of slots wide"
+            },
+            "numSlotsHigh": {
+              "type": "number",
+              "description": "Number of slots high"
+            }
+          }
+        },
+        "crac": {
+          "type": "object",
+          "description": "The device extension information for computer room air conditioner.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "ratedEnteringAirTemp": {
+              "type": "number",
+              "description": "Entering air temperature, F"
+            },
+            "ratedEnteringEvaporaterTemp": {
+              "type": "number",
+              "description": "Rated temp entering Evaporater, F"
+            },
+            "ratedCapacity": {
+              "type": "number",
+              "description": "Rated Capacity in BTU's"
+            }
+          }
+        },
+        "crah": {
+          "type": "object",
+          "description": "The device extension information for computer room air handler.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "ratedEnteringAirTemp": {
+              "type": "number",
+              "description": "Entering air temperature, F"
+            },
+            "ratedEnteringWaterTemp": {
+              "type": "number",
+              "description": "Rated temp water temperature, F"
+            },
+            "ratedCapacity": {
+              "type": "number",
+              "description": "Rated Capacity in BTU's"
+            }
+          }
+        },
+        "lowVoltageBreaker": {
+          "type": "object",
+          "description": "The device extension information for low voltage breaker.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps"
+            },
+            "interruptRating": {
+              "type": "number",
+              "description": "The rating in amps at which the breaker will trip or interrupt."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "lowVoltageIsolator": {
+          "type": "object",
+          "description": "The device extension information for a low voltage breaker.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed"
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "lowVoltageSwitch": {
+          "type": "object",
+          "description": "The device extension information for a voltage switch.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "mainBreaker": {
+          "type": "object",
+          "description": "The device extension information for the main breaker.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps"
+            },
+            "interruptRating": {
+              "type": "number",
+              "description": "The rating in amps at which the breaker will trip or interrupt."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "mediumVoltageBreaker": {
+          "type": "object",
+          "description": "The device extension information for a medium voltage breaker.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps"
+            },
+            "interruptRating": {
+              "type": "number",
+              "description": "The rating in amps at which the breaker will trip or interrupt."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "mediumVoltageSwitch": {
+          "type": "object",
+          "description": "The device extension information for a medium voltage switch.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "breakerPanel": {
+          "type": "object",
+          "description": "The device extension information for a voltage switch.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "panelRatingAmps": {
+              "type": "number",
+              "description": "Rated current for the panel in Amps."
+            },
+            "numBreakerPos": {
+              "type": "number",
+              "description": "Number of breaker positions supported in this panel."
+            },
+            "panelStyle": {
+              "type": "string",
+              "description": "Single line or dual line of breakers."
+            },
+            "panelType": {
+              "type": "string",
+              "description": "Panel Type (Subfeed or Remote)"
+            },
+            "safetyFactor": {
+              "type": "number",
+              "description": "Saftey factor, usually a pecentage of the overall amp rating"
+            },
+            "withstandRated": {
+              "type": "number",
+              "description": "The withdstand rating."
+            },
+            "serviceClearanceFront": {
+              "type": "number",
+              "description": "The clearance distance in the front."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "pdu": {
+          "type": "object",
+          "description": "The device extension information for a voltage switch.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "nominalInputVolts": {
+              "type": "number",
+              "description": "Nominal input voltage"
+            },
+            "nominalOutputVolts": {
+              "type": "number",
+              "description": "Nominal Output voltage"
+            },
+            "numberOfFeeds": {
+              "type": "number",
+              "description": "Number of feeds for the PDU"
+            },
+            "maximumPowerRatingkVA": {
+              "type": "number",
+              "description": "The maximum power rating in KVA."
+            },
+            "withstandRated": {
+              "type": "number",
+              "description": "The withdstand rating."
+            },
+            "additiveOutputVoltageHarmonicDistortion": {
+              "type": "number",
+              "description": "The output voltage harmonic distortion."
+            },
+            "efficiencyNormalAt100PercentLoad": {
+              "type": "number",
+              "description": "The efficiency at 100 percent load."
+            },
+            "efficiencyNormalAt75PercentLoad": {
+              "type": "number",
+              "description": "The efficiency at 75 percent load."
+            },
+            "efficiencyNormalAt50PercentLoad": {
+              "type": "number",
+              "description": "The efficiency at 50 percent load."
+            },
+            "efficiencyNormalAt25PercentLoad": {
+              "type": "number",
+              "description": "The efficiency at 25 percent load."
+            },
+            "numberOfFans": {
+              "type": "number",
+              "description": "Number of fans."
+            },
+            "numberOfRedundantFans": {
+              "type": "number",
+              "description": "Number of redundant fans."
+            },
+            "minClearanceTop": {
+              "type": "number",
+              "description": "The minumum clearance at the top."
+            },
+            "serviceClearanceFront": {
+              "type": "number",
+              "description": "The clearance distance in the front."
+            },
+            "serviceClearanceRear": {
+              "type": "number",
+              "description": "The clearance distance at the rear."
+            },
+            "serviceClearanceLeft": {
+              "type": "number",
+              "description": "The clearance distance on the left."
+            },
+            "serviceClearanceRight": {
+              "type": "number",
+              "description": "The clearance distance on the right."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "maxOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The maximum operating relative humidity."
+            },
+            "minOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The minimum operating relative humidity."
+            },
+            "maxOperatingElevation": {
+              "type": "number",
+              "description": "The maximum operating elevation."
+            },
+            "heatDissipation": {
+              "type": "number",
+              "description": "The head dissipation."
+            },
+            "coolingMethod": {
+              "type": "string",
+              "description": "The cooling method"
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "powerConsumer": {
+          "type": "object",
+          "description": "The device extension information for a device that is a power consumer.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "wattLoadFaceplate": {
+              "type": "number",
+              "description": "The load of the device based on the faceplate data, in watts"
+            },
+            "wattLoadDerated": {
+              "type": "number",
+              "description": "The load of the device based on the data derated by the user, in watts"
+            },
+            "minNumberOfConnections": {
+              "type": "number",
+              "description": "Minimum number of power connection this device requires"
+            },
+            "powerFactor": {
+              "type": "number",
+              "description": "Power factor of the consumer, defaults to 0.97"
+            },
+            "inputVoltage": {
+              "type": "number",
+              "description": "Input voltage of the consumer"
+            },
+            "currentNumberOfPhases": {
+              "type": "number",
+              "description": "current number of phases for the consumer, depends on upstream connections"
+            }
+          }
+        },
+        "powerDistributor": {
+          "type": "object",
+          "description": "The device extension information for power distributors that feed power to other devices.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "numberOfLegs": {
+              "type": "number",
+              "description": "Number of legs for power on the input"
+            },
+            "loadSafetyFactor": {
+              "type": "number",
+              "description": "Percentage rating of the load versus max current or power"
+            },
+            "powerMaxOutputWatts": {
+              "type": "number",
+              "description": "Max amount of power for devices rated in Watts, such as Generators, UPS's."
+            },
+            "powerMaxOutputAmps": {
+              "type": "number",
+              "description": "Max power in Amsp for current rated devices such as PDU's, Breaker Panels"
+            },
+            "inputVoltage": {
+              "type": "number",
+              "description": "Input voltage to the distributor"
+            },
+            "outputVoltage": {
+              "type": "number",
+              "description": "Output voltage from the distributor, maybe different for distributors that have XFormers"
+            },
+            "powerMaxOutputUnits": {
+              "type": "string",
+              "description": "Which power unit to use Amps or Watts"
+            },
+            "numberOfFeeds": {
+              "type": "number",
+              "description": "Nubmer of fields"
+            },
+            "faceplateWattsPhaseA": {
+              "type": "number",
+              "description": "faceplace watts for Phase A or leg 1"
+            },
+            "faceplateWattsPhaseB": {
+              "type": "number",
+              "description": "faceplace watts for Phase B or leg 2"
+            },
+            "faceplateWattsPhaseC": {
+              "type": "number",
+              "description": "faceplace watts for Phase C or leg 3"
+            },
+            "deratedWattsPhaseA": {
+              "type": "number",
+              "description": "derated Watts Phase A"
+            },
+            "deratedWattsPhaseB": {
+              "type": "number",
+              "description": "derated Watts Phase B"
+            },
+            "deratedWattsPhaseC": {
+              "type": "number",
+              "description": "derated Watts Phase C"
+            },
+            "faceplateAmpsPhaseA": {
+              "type": "number",
+              "description": "Faceplate Amps Phase A"
+            },
+            "faceplateAmpsPhaseB": {
+              "type": "number",
+              "description": "Faceplate Amps Phase B"
+            },
+            "faceplateAmpsPhaseC": {
+              "type": "number",
+              "description": "Faceplate Amps Phase C"
+            },
+            "deratedAmpsPhaseA": {
+              "type": "number",
+              "description": "derated Amps Phase A"
+            },
+            "deratedAmpsPhaseB": {
+              "type": "number",
+              "description": "derated Amps Phase B"
+            },
+            "deratedAmpsPhaseC": {
+              "type": "number",
+              "description": "derated Amps Phase C"
+            },
+            "faceplateKVAPhaseA": {
+              "type": "number",
+              "description": "faceplate KVA Phase A"
+            },
+            "faceplateKVAPhaseB": {
+              "type": "number",
+              "description": "faceplate KVA Phase B"
+            },
+            "faceplateKVAPhaseC": {
+              "type": "number",
+              "description": "faceplate KVA Phase C"
+            },
+            "deratedKVAPhaseA": {
+              "type": "number",
+              "description": "derated KVA Phase A"
+            },
+            "deratedKVAPhaseB": {
+              "type": "number",
+              "description": "derated KVA Phase B"
+            },
+            "deratedKVAPhaseC": {
+              "type": "number",
+              "description": "derated KVA Phase C"
+            }
+          }
+        },
+        "powerMeter": {
+          "type": "object",
+          "description": "The device extension information for a power meter.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            }
+          }
+        },
+        "rack": {
+          "type": "object",
+          "description": "The device extension information for a rack.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "insideHeight": {
+              "type": "number",
+              "description": "Inside height of the rack opening, in inches"
+            },
+            "insideWidth": {
+              "type": "number",
+              "description": "Inside width of the rack opening, in inches"
+            },
+            "insideDepth": {
+              "type": "number",
+              "description": "Inside depth of the rack opening, in inches"
+            },
+            "bottomRUOffsetX": {
+              "type": "number",
+              "description": "The distance in inches of the X offset from outside dimensions to opening"
+            },
+            "bottomRUOffsetY": {
+              "type": "number",
+              "description": "The distance in inches of the Y offset from outside dimensions to opening"
+            },
+            "weightBearingCapacity": {
+              "type": "number",
+              "description": "How much weight can the rack hold"
+            },
+            "startingRU": {
+              "type": "number",
+              "description": "Starting RU of the rack opening, usually 0 or 1"
+            },
+            "isRuScaleTopDown": {
+              "type": "boolean",
+              "description": "Set true if the Rack scale starts at the top, false if it starts at the bottom"
+            }
+          }
+        },
+        "roomCoolingProvider": {
+          "type": "object",
+          "description": "The device extension information for a room cooling provider such as CRAC and CRAH units.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "heatDissipated": {
+              "type": "number",
+              "description": "Amount of heat dissipated by the cooler, can be negative"
+            },
+            "installedHeight": {
+              "type": "number",
+              "description": "The install height."
+            },
+            "installedWidth": {
+              "type": "number",
+              "description": "The install width."
+            },
+            "installedDepth": {
+              "type": "number",
+              "description": "The install depth."
+            },
+            "installedWeight": {
+              "type": "number",
+              "description": "The install weight."
+            },
+            "serviceClearanceFront": {
+              "type": "number",
+              "description": "The clearance distance in the front."
+            },
+            "serviceClearanceRear": {
+              "type": "number",
+              "description": "The clearance distance at the rear."
+            },
+            "serviceClearanceLeft": {
+              "type": "number",
+              "description": "The clearance distance on the left."
+            },
+            "serviceClearanceRight": {
+              "type": "number",
+              "description": "The clearance distance on the right."
+            },
+            "fullLoadAmps": {
+              "type": "number",
+              "description": "The full load in amps."
+            },
+            "minWireSizingAmps": {
+              "type": "number",
+              "description": "The minimum wire size in amps."
+            },
+            "maxOverloadProtectiveDevice": {
+              "type": "number",
+              "description": "The maximum overload protection on the device."
+            },
+            "withstandRated": {
+              "type": "number",
+              "description": "The withdstand rating."
+            },
+            "numberOfAirFilters": {
+              "type": "number",
+              "description": "The number of air filters."
+            },
+            "airFilterSize": {
+              "type": "string",
+              "description": "The filter air size (e.g. 20x20)"
+            },
+            "airflowType": {
+              "type": "number",
+              "description": "The air floor type. The type can be either UPFLOW, DOWNFLOW, DISPLACEMENT or ROW."
+            },
+            "fanType": {
+              "type": "number",
+              "description": "The fan type. The type can be either CENTRIFUGAL, EC, or AXIAL."
+            },
+            "humidifierType": {
+              "type": "number",
+              "description": "The humidifier type. The type can be either INFRARED, STEAM, or NONE."
+            },
+            "controlType": {
+              "type": "number",
+              "description": "The control type."
+            },
+            "reheatType": {
+              "type": "number",
+              "description": "The reheat type. The type can be either ELECTRIC, HOTWATER, STEAM or NONE."
+            },
+            "cwControlValveType": {
+              "type": "number",
+              "description": "The CW control valve type. The type can be either 2W, 3W or NONE."
+            },
+            "balanceValve": {
+              "type": "boolean",
+              "description": "Indicates whether a balance valve is present."
+            },
+            "condensatePump": {
+              "type": "boolean",
+              "description": "Indicates whether a condenstate pump is present."
+            },
+            "smokeDetector": {
+              "type": "boolean",
+              "description": "Indicates whether a smoke detector is present."
+            },
+            "maxInletAirTempContinuousOperation": {
+              "type": "number",
+              "description": "The maximum inlet air temperature continuous operation."
+            },
+            "unitMaxInputPowerRating": {
+              "type": "number",
+              "description": "The unit maximum input power rating."
+            },
+            "sensibleCoolingRating": {
+              "type": "number",
+              "description": "The sensible cooling rating for the unit."
+            },
+            "unitDerating": {
+              "type": "number",
+              "description": "The unit derating value."
+            },
+            "cwSupplyTemperature": {
+              "type": "number",
+              "description": "The CW supply temperature for the unit."
+            },
+            "cwFlowRate": {
+              "type": "number",
+              "description": "The CW Flow rate."
+            },
+            "returnAirTemperature": {
+              "type": "number",
+              "description": "The return air temperature for the unit."
+            },
+            "returnAirRelativeHumidity": {
+              "type": "number",
+              "description": "The return air relative humidity for the unit."
+            },
+            "airFlowRateAtRatedStaticPressure": {
+              "type": "number",
+              "description": "The air flow rate at rated static pressure."
+            },
+            "externalStaticPressure": {
+              "type": "number",
+              "description": "The external static pressure."
+            }
+          }
+        },
+        "rpp": {
+          "type": "object",
+          "description": "The device extension information for a remote power panel.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "panelConnectType": {
+              "type": "string",
+              "description": "Panel Connect Type"
+            },
+            "rppType": {
+              "type": "string",
+              "description": "Rpp Type"
+            },
+            "numberOfPanelboards": {
+              "type": "number",
+              "description": "The number of panel boards."
+            },
+            "numberOfSubfeedBreakers": {
+              "type": "number",
+              "description": "The number of sub feed breakers."
+            },
+            "numberOfFeeds": {
+              "type": "number",
+              "description": "The number of feeds."
+            },
+            "withstandRated": {
+              "type": "number",
+              "description": "The withdstand rating."
+            },
+            "minClearanceTop": {
+              "type": "number",
+              "description": "The minumum clearance at the top."
+            },
+            "serviceClearanceFront": {
+              "type": "number",
+              "description": "The clearance distance in the front."
+            },
+            "serviceClearanceRear": {
+              "type": "number",
+              "description": "The clearance distance at the rear."
+            },
+            "serviceClearanceLeft": {
+              "type": "number",
+              "description": "The clearance distance on the left."
+            },
+            "serviceClearanceRight": {
+              "type": "number",
+              "description": "The clearance distance on the right."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The maximum operating temperature."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The minimum operating temperature."
+            },
+            "maxOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The maximum operating relative humidity."
+            },
+            "minOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The minimum operating relative humidity."
+            },
+            "maxOperatingElevation": {
+              "type": "number",
+              "description": "The maximum operating elevation."
+            },
+            "heatDissipation": {
+              "type": "number",
+              "description": "The heat dissipation."
+            },
+            "coolingMethod": {
+              "type": "string",
+              "description": "The cooling method."
+            },
+            "MTBFExcludingBatteries": {
+              "type": "number",
+              "description": "The mean time between failures excluding batteries."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The mean time between failures."
+            }
+          }
+        },
+        "server": {
+          "type": "object",
+          "description": "The device extension information for a server.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            }
+          }
+        },
+        "subfeedBreaker": {
+          "type": "object",
+          "description": "The device extension information for a subfeed breaker.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "hasNeutral": {
+              "type": "boolean",
+              "description": "Does the subfeed breaker have a neutral line"
+            },
+            "overCurrentProtectionRating": {
+              "type": "number",
+              "description": "The over current protection rating in Amps"
+            },
+            "interruptRating": {
+              "type": "number",
+              "description": "The rating in amps at which the breaker will trip or interrupt."
+            },
+            "currentRating": {
+              "type": "number",
+              "description": "Current rating in amps"
+            },
+            "numberOfPoles": {
+              "type": "number",
+              "description": "Number of Poles that the breaker or switch has."
+            },
+            "mountType": {
+              "type": "string",
+              "description": "How the breaker is mounted in the panel, pull out or fixed."
+            },
+            "voltageRated": {
+              "type": "number",
+              "description": "The rated voltage if available."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The rated maximum operating temperature if available."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The rated minumum operating temperature if available."
+            },
+            "designMTBF": {
+              "type": "number",
+              "description": "The rated average time time between failures."
+            }
+          }
+        },
+        "transferSwitch": {
+          "type": "object",
+          "description": "The device extension information for a transfer switch.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "switchName": {
+              "type": "string",
+              "description": "Switch name"
+            }
+          }
+        },
+        "ups": {
+          "type": "object",
+          "description": "The device extension information for a UPS unit.",
+          "properties": {
+            "deviceId": {
+              "type": "string",
+              "description": "The device Id for this device extension."
+            },
+            "withstandRated": {
+              "type": "number",
+              "description": "The withdstand rating."
+            },
+            "minClearanceTop": {
+              "type": "number",
+              "description": "The minumum clearance at the top."
+            },
+            "serviceClearanceFront": {
+              "type": "number",
+              "description": "The clearance distance in the front."
+            },
+            "serviceClearanceRear": {
+              "type": "number",
+              "description": "The clearance distance at the rear."
+            },
+            "serviceClearanceLeft": {
+              "type": "number",
+              "description": "The clearance distance on the left."
+            },
+            "serviceClearanceRight": {
+              "type": "number",
+              "description": "The clearance distance on the right."
+            },
+            "maxOperatingTemperature": {
+              "type": "number",
+              "description": "The maximum operating temperature."
+            },
+            "minOperatingTemperature": {
+              "type": "number",
+              "description": "The minimum operating temperature."
+            },
+            "maxOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The maximum operating relative humidity."
+            },
+            "minOperatingRelativeHumidity": {
+              "type": "number",
+              "description": "The minimum operating relative humidity."
+            },
+            "maxOperatingElevation": {
+              "type": "number",
+              "description": "The maximum operating elevation."
+            },
+            "heatDissipation": {
+              "type": "number",
+              "description": "The heat dissipation."
+            },
+            "coolingMethod": {
+              "type": "string",
+              "description": "The cooling method."
+            },
+            "areAirFiltersServiceable": {
+              "type": "boolean",
+              "description": "Indicates whether air filters are serviceable."
+            },
+            "isScalable": {
+              "type": "boolean",
+              "description": "Indicates whether the unit is scalable."
+            },
+            "maxScalableKW": {
+              "type": "number",
+              "description": "The maximum number of KW that the unit is scalable."
+            },
+            "powerFactorAt100PercentLoad": {
+              "type": "number",
+              "description": "The power factor at 100 percent load."
+            },
+            "powerFactorAt50PercentLoad": {
+              "type": "number",
+              "description": "The power factor at 50 percent load."
+            },
+            "currentTotalHarmonicDistortionAt100Percent": {
+              "type": "number",
+              "description": "The total harmonic distortion at 100 percent."
+            },
+            "nominalNumberOfBatteryJars": {
+              "type": "number",
+              "description": "The number of nominal battery jars."
+            },
+            "minNumberOfBatteryJars": {
+              "type": "number",
+              "description": "The minimum number of battery jars."
+            },
+            "maxNumberOfBatteryJars": {
+              "type": "number",
+              "description": "The maximum number of battery jars."
+            },
+            "maxOutputVoltageHarmonicDistortion": {
+              "type": "number",
+              "description": "The maximum voltage harmonic distortion."
+            },
+            "outputPowerFactorAt100PercentLoad": {
+              "type": "number",
+              "description": "The output power factor at 100 percent load."
+            },
+            "efficiencyNormalAt100PercentLoad": {
+              "type": "number",
+              "description": "The normal efficiency at 100 percent load."
+            },
+            "efficiencyNormalAt75PercentLoad": {
+              "type": "number",
+              "description": "The normal efficiency at 75 percent load."
+            },
+            "efficiencyNormalAt50PercentLoad": {
+              "type": "number",
+              "description": "The normal efficiency at 50 percent load."
+            },
+            "efficiencyNormalAt25PercentLoad": {
+              "type": "number",
+              "description": "The normal efficiency at 25 percent load."
+            },
+            "efficiencyBatteryAt100PercentLoad": {
+              "type": "number",
+              "description": "The battery efficiency at 100 percent load."
+            },
+            "efficiencyBatteryAt75PercentLoad": {
+              "type": "number",
+              "description": "The battery efficiency at 75 percent load."
+            },
+            "efficiencyBatteryAt50PercentLoad": {
+              "type": "number",
+              "description": "The battery efficiency at 50 percent load."
+            },
+            "efficiencyBatteryAt25PercentLoad": {
+              "type": "number",
+              "description": "The battery efficiency at 25 percent load."
+            },
+            "efficiencyEcoAt100PercentLoad": {
+              "type": "number",
+              "description": "The efficiency economizer at 100 percent load."
+            },
+            "efficiencyEcoAt75PercentLoad": {
+              "type": "number",
+              "description": "The efficiency economizer at 75 percent load."
+            },
+            "efficiencyEcoAt50PercentLoad": {
+              "type": "number",
+              "description": "The efficiency economizer at 50 percent load."
+            },
+            "efficiencyEcoAt25PercentLoad": {
+              "type": "number",
+              "description": "The efficiency economizer at 25 percent load."
+            },
+            "overloadRating110Percent": {
+              "type": "number",
+              "description": "The overload rating at 110 percent."
+            },
+            "overloadRating125Percent": {
+              "type": "number",
+              "description": "The overload rating at 125 percent."
+            },
+            "bypassOverRating110Percent": {
+              "type": "number",
+              "description": "The bypass overrating at 110 percent."
+            },
+            "bypassOverRating125Percent": {
+              "type": "number",
+              "description": "The bypass overrating at 125 percent."
+            },
+            "bypassOverRating150Percent": {
+              "type": "number",
+              "description": "The bypass overrating at 150 percent."
+            },
+            "numberOfRedundantFans": {
+              "type": "number",
+              "description": "The number of redundant fans."
+            },
+            "maxNumOfParalleledModules": {
+              "type": "number",
+              "description": "The maximum number of parallel modules."
+            },
+            "continuousOverloadRating": {
+              "type": "number",
+              "description": "The continuous overload rating."
+            },
+            "nominalBypassVolts": {
+              "type": "number",
+              "description": "The nominal bypass in volts."
+            }
+          }
+        }
+      }
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Web Interface of the device if any, copied from symbol.(obtained from the referenced symbol)."
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "type": "object",
+          "description": "Hypermedia self link.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "description": "Hypermedia link for the symbol image.",
+          "properties": {
+            "href": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

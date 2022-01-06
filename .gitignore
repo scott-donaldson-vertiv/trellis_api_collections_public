@@ -1,0 +1,23 @@
+*.log
+.vs/**
+.vs/
+*.sln
+*.pyproj
+
+# Certificate Types
+*.p7b		# PKCS#7
+*.cer		# X.509 PEM/DER
+*.der		# X.509 PEM/DER
+*.pem		# X.509 PEM
+*.crt		# X.509 PEM/DER
+*.p12		# PKCS#12
+*.jks		# Java
+*.jceks		# Java
+*.bks		# BouncyCastle
+*.bks		# BouncyCastle FIPS
+*.pfx		# PKCS#12
+*.jce		# Java
+*.ubr		# UBER Keystore
+
+# Temporary Exclusions
+trellis_enterprise/examples/rust/**

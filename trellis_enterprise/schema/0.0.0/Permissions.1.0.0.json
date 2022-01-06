@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Permissions.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "description": "List of permission objects",
+          "readonly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "_links": {
+                "type": "object",
+                "properties": {
+                  "self": {
+                    "description": "Hypermedia (HAL) self link for this permission.",
+                    "type": "string",
+                    "format": "uri"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia (HAL) self link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "search": {
+          "description": "Hypermedia (HAL) link to list the available searches.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self",
+        "search"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

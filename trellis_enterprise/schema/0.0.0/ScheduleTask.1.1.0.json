@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ScheduleTask.1.1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "maintenace": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the action type. Must be maintenance."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the action task"
+        },
+        "description": {
+          "type": "string",
+          "description": "The action task description."
+        },
+        "position": {
+          "type": "integer",
+          "description": "The action task position within the collection."
+        },
+        "floorIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "uniqueItems": true
+          },
+          "description": "List of floors Ids."
+        },
+        "spaceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "uniqueItems": true
+          },
+          "description": "List of spaces Ids."
+        },
+        "deviceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "uniqueItems": true
+          },
+          "description": "List os device Ids."
+        },
+        "maintenanceMode": {
+          "type": "boolean",
+          "description": "Wherher or not is in maintenance mode"
+        }
+      }
+    },
+    "eventsalarmsarchive": {
+      "type": {
+        "type": "string",
+        "description": "The type of the action type. Must be eventsalarmsarchive."
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the action task"
+      },
+      "description": {
+        "type": "string",
+        "description": "The action task description."
+      },
+      "position": {
+        "type": "integer",
+        "description": "The action task position within the collection"
+      }
+    }
+  },
+  "properties": {
+    "scheduledTaskName": {
+      "type": "string",
+      "description": "The Schedule Task Name.",
+      "readonly": true
+    },
+    "scheduledTaskDescription": {
+      "type": "string",
+      "description": "The Schedule Task Description."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "IDLE", "IN_PROGRESS", "SUCCESS", "FAIL", "TERMINATED", "CANCELLED", "STALE", "UNKNOWN"
+      ],
+      "description": "Status of the Scheduled Task.",
+      "readonly": true
+    },
+    "username": {
+      "type": "string",
+      "description": "The name of the user running the task.",
+      "readonly": true
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was last modified.",
+      "readonly": true
+    },
+    "nextTaskAction": {
+      "type": "integer",
+      "description": "The next task action to execute based on the position",
+      "readonly": true
+    },
+    "tafReferenceId": {
+      "type": "string",
+      "description": "Reference id"
+    },
+    "actions": {
+      "type": "array",
+      "description": "List of action types for this scheduled task.",
+      "oneOf": [{
+          "$ref": "#/definitions/maintenance"
+        },
+        {
+          "$ref": "#/definitions/eventsalarmsarchive"
+        }
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the Schedule Task.",
+      "readonly": true
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "actions"
+  ]
+}

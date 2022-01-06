@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+
+        "licensedfeaturescount": {
+            "id": "/properties/licensedfeaturescount",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "availableCount": {
+                    "id": "/properties/licensedfeaturescount/properties/availableCount",
+                    "type": "string"
+                },
+               "consumedCount": {
+                    "id": "/properties/licensedfeaturescount/properties/consumedCount",
+                    "type": "string"
+                },
+                "featureName": {
+                    "id": "/properties/licensedfeaturescount/properties/featureName",
+                    "type": "string"
+                },
+				"featureVersion": {
+                    "id": "/properties/licensedfeaturescount/properties/featureVersion",
+                    "type": "string"
+                },
+				"totalCount": {
+                    "id": "/properties/licensedfeaturescount/properties/totalCount",
+                    "type": "string"
+                },
+				"exceededCount": {
+                    "id": "/properties/licensedfeaturescount/properties/exceededCount",
+                    "type": "string"
+                },
+				"historyType": {
+                    "id": "/properties/licensedfeaturescount/properties/historyType",
+                    "type": "string"
+                }
+			}
+        }
+        
+    },
+    "type": "object"
+}

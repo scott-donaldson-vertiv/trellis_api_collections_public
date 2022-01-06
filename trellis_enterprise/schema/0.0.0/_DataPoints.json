@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "id": "http://example.com/example.json",
+  "properties": {
+    "_links": {
+      "id": "/properties/_links",
+      "properties": {
+        "self": {
+          "id": "/properties/_links/properties/self",
+          "properties": {
+            "href": {
+              "id": "/properties/_links/properties/self/properties/href",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "datapointDefinition": {
+      "id": "/properties/datapointDefinition",
+      "properties": {
+        "id": {
+          "id": "/properties/datapointDefinition/properties/id",
+          "type": "string"
+        },
+        "name": {
+          "id": "/properties/datapointDefinition/properties/name",
+          "type": "string"
+        },
+        "tag": {
+          "id": "/properties/datapointDefinition/properties/tag",
+          "type": "string"
+        },
+        "unitOfmeasure": {
+          "id": "/properties/datapointDefinition/properties/unitOfmeasure",
+          "type": "string"
+        },
+        "unitOfmeasureTag": {
+          "id": "/properties/datapointDefinition/properties/unitOfmeasureTag",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "datastateid": {
+      "id": "/properties/datastateid",
+      "type": "integer"
+    },
+    "id": {
+      "id": "/properties/id",
+      "type": "string"
+    },
+    "ownerId": {
+      "id": "/properties/ownerId",
+      "type": "string"
+    },
+    "timestamp": {
+      "id": "/properties/timestamp",
+      "type": "string"
+    },
+    "unitOfMeasure": {
+      "id": "/properties/unitOfMeasure",
+      "type": "string"
+    },
+    "unitOfMeasureTag": {
+      "id": "/properties/unitOfMeasureTag",
+      "type": "string"
+    },
+    "value": {
+      "id": "/properties/value",
+      "type": "number"
+    }
+  },
+  "type": "object"
+}

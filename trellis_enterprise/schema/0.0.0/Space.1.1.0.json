@@ -1,0 +1,479 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Space.1.1.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of this resource."
+    },
+    "comment": {
+      "type": "string",
+      "description": "Free form comment."
+    },
+    "displayCategoryProgrammaticName": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "readonly": true
+    },
+    "displayCategoryDisplay": {
+      "type": "string",
+      "description": "The display string (localized) for the display category of this resource.",
+      "readonly": true
+    },
+    "categories": {
+      "type": "array",
+      "description": "List of category programmatic names this resource belongs to, includes the display category",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the device or container in the hierarchy, in the form of Enterprise->Building->Floor etc.."
+    },
+    "owner": {
+      "type": "string",
+      "description": "Owner name of the resource, i.e. which user normally manages this resource."
+    },
+    "ownerEmail": {
+      "type": "string",
+      "description": "Owner email to contact for this resource."
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "recordCreateDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "readonly": true
+    },
+    "physicalPlacement": {
+      "type": "object",
+      "description": "The object ID of the parent Floor.",
+      "properties": {
+        "type": {
+          "requiredOnCreate": true,
+          "enum": [
+            "inContainer"
+          ]
+        },
+        "parentObjectOid": {
+          "type": "string",
+          "requiredOnCreate": true
+        }
+      }
+    },
+    "capacities": {
+      "type": "array",
+      "description": "Capacities for this resource",
+      "readonly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "programmaticNameDisplay": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "capacityValue": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "userDefinedProperties": {
+      "type": "array",
+      "description": "User Defined Properties for this resource",
+      "items": {
+        "type": "object",
+        "properties": {
+          "programmaticName": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "name": {
+            "type": "string",
+            "readonly": "true"
+          },
+          "udpValue": {
+            "type": "string"
+          },
+          "ownerTenantId": {
+            "type": "string",
+            "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+          },
+          "tenantIds": {
+            "type": "array",
+            "description": "List of tenant names that this resource is shared to.",
+            "items": {
+              "type": "string",
+              "description": "The tenant name that this resource is shared to"
+            }
+          },
+          "sharedTenancyOption": {
+            "type": "string",
+            "enum": [
+              "SHARED",
+              "ALL",
+              "NONE"
+            ],
+            "description": "Specify different shared tenancy options"
+          },
+          "udpType": {
+            "type": "string",
+            "enum": [
+              "STRING",
+              "FLOAT",
+              "INTEGER",
+              "LONG",
+              "BOOLEAN",
+              "BIGDECIMAL",
+              "TIME",
+              "DATE"
+            ],
+            "description": "The data type of the UDP value such as String, Float, Integer, Long, Boolean, Date(An ISO8601 format string), BigDecimal",
+            "readonly": true
+          }
+        }
+      }
+    },
+    "alarmCounts": {
+      "type": "object",
+      "description": "The counts for critical, warning, normal and total alarms for this space.",
+      "properties": {
+        "criticalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with critical severity for this space.",
+          "readonly": true
+        },
+        "warningAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with warning severity for this space.",
+          "readonly": true
+        },
+        "normalAlarmCount": {
+          "type": "integer",
+          "description": "The number of alarms with normalseverity for this space.",
+          "readonly": true
+        },
+        "totalAlarmCount": {
+          "type": "integer",
+          "description": "The total number of alarms for this space.",
+          "readonly": true
+        }
+      }
+    },
+    "originX": {
+      "type": "number",
+      "description": "Origin of the Space relative to the Floor in inches, X coordinate."
+    },
+    "originY": {
+      "type": "number",
+      "description": "Origin of the Space relative to the Floor in inches, Y coordinate."
+    },
+    "maintenanceMode": {
+      "type": "boolean",
+      "description": "Whether or not the container is in maintenance mode.",
+      "readonly": "true"
+    },
+    "alarmStatus": {
+      "type": "string",
+      "description": "Overall alarm status for the space.",
+      "readonly": "true"
+    },
+    "deviceState": {
+      "type": "string",
+      "description": "Overall Device State for the space",
+      "readonly": "true"
+    },
+    "ceilingHeight": {
+      "type": "number",
+      "description": "Height of the physical ceiling in inches.  The range is from 0ft to 50ft.",
+      "default": 192
+    },
+    "dropCeilingHeight": {
+      "type": "number",
+      "description": "Height of drop ceiling in inches above the floor.",
+      "default": 144
+    },
+    "raisedFloorHeight": {
+      "type": "number",
+      "description": "Height of raised floor in inches above the floor.",
+      "default": 24
+    },
+    "polygon": {
+      "type": "array",
+      "description": "Polygon describing the physical boundary of this space.",
+      "items": {
+        "properties": {
+          "x": {
+            "type": "number"
+          },
+          "y": {
+            "type": "number"
+          },
+          "ordinal": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "x",
+          "y",
+          "ordinal"
+        ]
+      },
+      "minItems": 3,
+      "uniqueItems": true
+    },
+    "spaceUse": {
+      "type": "string",
+      "description": "How this specific space is used in relationship to the Floor"
+    },
+    "levels": {
+      "type": "array",
+      "description": "An array of all levels supported by this space.",
+      "readonly": true,
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The globally unique id of this Space Level.",
+            "readonly": true
+          },
+          "nameDisplay": {
+            "type": "string",
+            "description": "The display name for the Level type.",
+            "readonly": true
+          },
+          "programmaticName": {
+            "type": "string",
+            "description": "The programmatic name for the Level type.",
+            "readonly": true
+          },
+          "isUserDefined": {
+            "type": "boolean",
+            "description": "True if this level was dev=fined by a user, false if defined by the system",
+            "readonly": true
+          },
+          "zOrder": {
+            "type": "number",
+            "description": "The Z order this level is painted with in graphic displays of the levels",
+            "readonly": true
+          }
+        }
+      }
+    },
+    "floorGrid": {
+      "description": "The floor grid definition for this space.",
+      "properties": {
+        "offsetX": {
+          "requiredOnCreate": true,
+          "type": "number",
+          "minimum": 0,
+          "description": "X offset of where the grid system starts relative to the space polygon., in inches."
+        },
+        "offsetY": {
+          "requiredOnCreate": true,
+          "type": "number",
+          "minimum": 0,
+          "description": "Y offset of where the grid system starts relative to the space polygon., in inches."
+        },
+        "tileSizeLength": {
+          "requiredOnCreate": true,
+          "type": "number",
+          "minimum": 0,
+          "description": "the Length (Y) of the tile displayed in the grid in inches."
+        },
+        "tileSizeWidth": {
+          "requiredOnCreate": true,
+          "type": "number",
+          "minimum": 0,
+          "description": "the Width (X) of the tile displayed in the grid in inches."
+        },
+        "percentageOpen": {
+          "type": "number",
+          "description": "Default percentage opening(airflow) for the tile."
+        },
+        "fullGridWithNames": {
+          "type": "boolean",
+          "readonly": true,
+          "description": "Flag to indicate that this grid has tile names."
+        },
+        "rowNames": {
+          "type": "array",
+          "description": "Names for the Rows, only set if the fullGridWithNames is true.",
+          "readonly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "rowNamesAsString": {
+          "type": "string",
+          "description": "A list of the rows names as a set of delimited strings as a single string.",
+          "readonly": true
+        },
+        "columnNames": {
+          "type": "array",
+          "description": "Names for the columns, only set if the fullGridWithNames is true.",
+          "readonly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "columnNamesAsString": {
+          "type": "string",
+          "description": "A list of the columns names as a set of delimited strings in a single string.",
+          "readonly": true
+        },
+        "nameStringDelimiter": {
+          "type": "string",
+          "description": "The delimiter to be used in tile names.",
+          "readonly": true
+        },
+        "rowExclusions": {
+          "type": "array",
+          "description": "Strings excluded from row names, names to exclude such as ll, 00, etc..",
+          "items": {
+            "type": "string"
+          }
+        },
+        "columnExclusions": {
+          "type": "array",
+          "description": "Strings excluded from column names, names to exclude such as ll, 00, etc..",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rowAscending": {
+          "type": "boolean",
+          "description": "Indicator if row names are ascending or descending. Defaults to true.",
+          "default": true
+        },
+        "columnAscending": {
+          "type": "boolean",
+          "description": "Indicator if column names are ascending or descending. Defaults to true.",
+          "default": true
+        },
+        "rowColumnNamePattern": {
+          "type": "string",
+          "description": "Pattern to use to form the name string for the row and column.",
+          "readonly": true
+        },
+        "nameSeparator": {
+          "type": "string",
+          "description": "Row, Column name separator, the separator in the pattern between the row, column names."
+        },
+        "rowsStartsAt": {
+          "requiredOnCreate": true,
+          "type": "string",
+          "description": "Rows value starts at string."
+        },
+        "columnsStartsAt": {
+          "requiredOnCreate": true,
+          "type": "string",
+          "description": "Columns value starts at string."
+        },
+        "rowFirstThanColumn": {
+          "requiredOnCreate": true,
+          "type": "boolean",
+          "description": "True = Row comes first than column else column then row."
+        },
+        "rowFormat": {
+          "requiredOnCreate": true,
+          "type": "string",
+          "description": "Row Format (needs to be defined on create).",
+          "pattern": "^0-9,10-99,100-999|00-99,100-999|000-999|A-Z,AA-ZZ$"
+        },
+        "columnFormat": {
+          "requiredOnCreate": true,
+          "type": "string",
+          "description": "Column Format (needs to be defined on create).",
+          "pattern": "^0-9,10-99,100-999|00-99,100-999|000-999|A-Z,AA-ZZ$"
+        }
+      }
+    },
+    "permissions": {
+      "type": "string",
+      "enum": [
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "description": "FGA permissions that this user has for this space",
+      "readonly": true
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        },
+        "zones": {
+          "description": "Hypermedia link to contained buildings collection.",
+          "type": "string",
+          "format": "uri"
+        },
+        "devices": {
+          "description": "Hypermedia link to contained devices collection.",
+          "type": "string",
+          "format": "uri"
+        },
+        "parents": {
+          "description": "Hypermedia link to parent containers collection.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self",
+        "zones",
+        "devices",
+        "parents"
+      ]
+    }
+  },
+  "required": [
+    "_links",
+    "capacities",
+    "userDefinedProperties"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "definitions": {},
+    "id": "http://example.com/example.json",
+    "properties": {
+
+        "licensedproduct": {
+            "id": "/properties/licensedproduct",
+			"items": {},
+			"type": "array",
+            "properties": {
+                "activationId": {
+                    "id": "/properties/licensedproduct/properties/activationId",
+                    "type": "string"
+                },
+               "expirydate": {
+                    "id": "/properties/licensedproduct/properties/expirydate",
+                    "type": "string"
+                },
+                "licensed": {
+                    "id": "/properties/licensedproduct/properties/licensed",
+                    "type": "string"
+                },
+				"maintenance": {
+                    "id": "/properties/licensedproduct/properties/maintenance",
+                    "type": "string"
+                },
+				"pid": {
+                    "id": "/properties/licensedproduct/properties/pid",
+                    "type": "string"
+                },
+				"pname": {
+                    "id": "/properties/licensedproduct/properties/pname",
+                    "type": "string"
+                },
+				"type": {
+                    "id": "/properties/licensedproduct/properties/type",
+                    "type": "string"
+                },
+				"version": {
+                    "id": "/properties/licensedproduct/properties/version",
+                    "type": "string"
+                },
+				"historyType": {
+                    "id": "/properties/licensedproduct/properties/historyType",
+                    "type": "string"
+                }
+			}
+        }
+        
+    },
+    "type": "object"
+}

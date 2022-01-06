@@ -1,0 +1,178 @@
+{
+  "$schema":"http://json-schema.org/draft-04/schema#",
+  "title":"Events.1.0.0",
+  "type":"object",
+  "additionalProperties":true,
+  "properties":{
+    "_embedded":{
+      "type":"object",
+      "properties":{
+        "events":{
+          "type":"array",
+          "description":"List of event objects",
+          "readonly":true,
+          "items":{
+            "id":{
+              "type":"string",
+              "description":"The globally unique id the event",
+              "readonly":true
+            },
+            "subjectId":{
+              "type":"string",
+              "description":"The globally unique id the event subject.",
+              "readonly":true
+            },
+            "ownerTenantId" : {
+              "type": "string",
+              "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+            },			
+            "subjectName":{
+              "type":"string",
+              "description":"The name of the event subject.",
+              "readonly":true
+            },
+            "subjectTypeKey":{
+              "type":"string",
+              "description":"The Key For Subject type",
+              "readonly":true
+            },
+            "subjectCategory":{
+              "type":"string",
+              "description":"Event Subject category, this is a remap of the EventSubject from Trellis",
+              "readonly":true
+            },
+            "eventTypeProgrammaticName":{
+              "type":"string",
+              "description":"Programmatic name from the EventType table",
+              "readonly":true
+            },
+            "eventShortDescription":{
+              "type":"string",
+              "description":"The event type short description, in short form with no substitution(with raw substitution keys)",
+              "readonly":true
+            },
+            "eventLongDescription":{
+              "type":"string",
+              "description":"The event type description, in long form with no substitution(with raw substitution keys)",
+              "readonly":true
+            },
+            "isThresholdEvent":{
+              "type":"boolean",
+              "description":"Set true if this is a threahold event",
+              "readonly":true
+            },
+            "severityProgrammaticName":{
+              "type":"string",
+              "description":"Programmatic name of the Effective Severity",
+              "readonly":true
+            },
+            "severityDisplayProgrammaticName":{
+              "type":"string",
+              "description":"Display Programmatic name of the Effective Severity",
+              "readonly":true
+            },
+            "classificationProgrammaticName":{
+              "type":"string",
+              "description":"Programmatic name of the Event Classification",
+              "readonly":true
+            },
+            "classificationDisplayProgrammaticName":{
+              "type":"string",
+              "description":"The display name of the Event Classification",
+              "readonly":true
+            },
+            "facilityOrItEquipment":{
+              "type":"string",
+              "description":"If a device object is a IT or Faciilties device(valid if subjectType=device)",
+              "readonly":true
+            },
+            "userId":{
+              "type":"string",
+              "description":"UserID associated with the user who caused the event to be generated",
+              "readonly":true
+            },
+            "userName":{
+              "type":"string",
+              "description":"UserName associated with the user who caused the event to be generated",
+              "readonly":true
+            },
+            "receivedTimestamp":{
+              "type":"string",
+              "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+              "description":"The timestamp that Event was received",
+              "readonly":true
+            },
+            "sourceName":{
+              "type":"string",
+              "description":"The is the name of the source of the generated event",
+              "readonly":true
+            },
+            "sourceType":{
+              "type":"string",
+              "enum":[
+                "DEVICE",
+                "APPLICATION",
+                "PLATFORM",
+                "MANUAL",
+                "UMG"
+              ],
+              "description":"The Type of the source",
+              "readonly":true
+            },
+            "componentId":{
+              "type":"string",
+              "description":"Component ID of the source for multimodule devices",
+              "readonly":true
+            },
+            "componentName":{
+              "type":"string",
+              "description":"Component name of the source for multimodule devices",
+              "readonly":true
+            },
+            "eventSubstitutionValues":{
+              "type":"object",
+              "description":"Substitution values that would go into the Descriptions",
+              "readonly":true,
+              "patternProperties": {
+                ".{1,}": { "type": "string" }
+              }
+            },
+            "processId":{
+              "type":"string",
+              "description":"Workflow process ID",
+              "readonly":true
+            }
+          }
+        }
+      }
+    },
+    "_links":{
+      "type":"object",
+      "description":"Hypermedia (HAL) links to self and other resources.",
+      "properties":{
+        "self":{
+          "description":"Hypermedia (HAL) self link.",
+          "type":"string",
+          "format":"uri"
+        },
+        "next":{
+          "description":"Hypermedia (HAL) link to next events.",
+          "type":"string",
+          "format":"uri"
+        },
+        "search":{
+          "description":"Hypermedia (HAL) link to list the available searches.",
+          "type":"string",
+          "format":"uri"
+        }
+      },
+      "required":[
+        "self",
+        "search"
+      ]
+    }
+  },
+  "required":[
+    "_links"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ForecastActionResponse.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "datapoints": {
+      "type": "array",
+      "description": "The capacity datapoint time and value that were used for the forecast",
+      "items": {
+        "type": "object",
+        "description": "The capacity datapoint time and value",
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+            "description": "Specifies the capacity datapoint recorded date time."
+          },
+          "value": {
+            "type": "number",
+            "description": "Specifies the capacity datapoint value."
+          }
+        }
+      }
+    },
+    "forecast": {
+      "type": "object",
+      "description": "The forecast response",
+      "properties": {
+        "dates": {
+          "type": "array",
+          "description": "The forecast array for dates",
+          "items": {
+            "type": "object",
+            "description": "The capacity datapoint time and value",
+            "properties": {
+              "time": {
+                "type": "string",
+                "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+                "description": "Specifies the capacity datapoint recorded date time."
+              },
+              "value": {
+                "type": "number",
+                "description": "Specifies the capacity datapoint value."
+              }
+            }
+          },
+          "milestones": {
+            "type": "array",
+            "description": "The forecast array for milestones",
+            "items": {
+              "type": "object",
+              "description": "The capacity datapoint time and value",
+              "properties": {
+                "time": {
+                  "type": "string",
+                  "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+                  "description": "Specifies the capacity datapoint recorded date time."
+                },
+                "value": {
+                  "type": "number",
+                  "description": "Specifies the capacity datapoint value."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

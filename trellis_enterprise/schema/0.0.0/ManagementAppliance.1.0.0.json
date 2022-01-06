@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ManagementAppliance.1.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the management appliance.",
+      "readonly": true
+    },
+    "version": {
+      "type": "string",
+      "description": "The management appliance version",
+      "readonly": true
+    },
+    "displayCategory": {
+      "type": "string",
+      "description": "The display category for this resource.",
+      "readonly": true
+    },
+    "manufacturer": {
+      "type": "string",
+      "description": "Manufacturer of the device(obtained from the referenced symbol).",
+      "readonly": true
+    },
+    "typeIdentifierTag": {
+      "type": "string",
+      "description": "Unique tag copied from the Symbol to our instance. This relates the device to its symbol definition",
+      "readOnly": true
+    },
+    "model": {
+      "type": "string",
+      "description": "Model of the device from the manufacturer(obtained from the referenced symbol).",
+      "readonly": true
+    },
+    "modelQualifier": {
+      "type": "string",
+      "readonly": true,
+      "description": "Model Qualifier used to distinguish similar model numbers(obtained from the referenced symbol)."
+    },
+    "location": {
+      "type": "string",
+      "readonly": true,
+      "description": "Location of the management appliance in the hierarchy, in the form of Enterprise->Building->Floor etc.."
+    },
+    "deviceState": {
+      "type": "string",
+      "enum": [
+        "DEVICE_STATE_NORMAL",
+        "DEVICE_STATE_IN_MAINTENANCE_MODE",
+        "DEVICE_STATE_ALARM",
+        "DEVICE_STATE_NOT_RESPONDING"
+      ],
+      "description": "Overall Device State such as Normal, Alarm.",
+      "readonly": true
+    },
+    "monitoringState": {
+      "type": "string",
+      "enum": [
+        "MONITORING_STATE_ENABLED",
+        "MONITORING_STATE_DISABLED",
+        "MONITORING_STATE_PENDING",
+        "MONITORING_STATE_NA"
+      ],
+      "description": "Is the device being monitored enabled, disabled, pending, not-applicable.",
+      "readonly": true
+    },
+    "monitoringStartDate": {
+      "type": "string",
+      "format": "date-time (An ISO8601 format string of yyyy-MM-dd'T'HH:mm:ss.SSSZ in UTC time)",
+      "description": "Date the resource was created.",
+      "readonly": true
+    },
+    "ipAddress": {
+      "type": "string",
+      "description": "The management appliance IP where the monitoring is going to take place.",
+      "readonly": true
+    },
+    "db_version": {
+      "type": "string",
+      "description": "The database version",
+      "readonly": true
+    },
+    "gdd_version": {
+      "type": "string",
+      "description": "",
+      "readonly": true
+    },
+    "tgdd_version": {
+      "type": "string",
+      "description": "The Trellis Global Data Definition version",
+      "readonly": true
+    },
+    "master_version": {
+      "type": "string",
+      "description": "The master version of the management appliance",
+      "readonly": true
+    },
+    "firmware_version": {
+      "type": "string",
+      "description": "The firmware version of the management appliance",
+      "readonly": true
+    },
+    "engine_version": {
+      "type": "string",
+      "description": "The engine version of the management appliance",
+      "readonly": true
+    },
+    "ownerTenantId": {
+      "type": "string",
+      "description": "The tenant name that owns the resource or null if the owner is the super tenant."
+    },
+    "tenantIds": {
+      "type": "array",
+      "description": "List of tenant names that this resource is shared to.",
+      "items": {
+        "type": "string",
+        "description": "The tenant name that this resource is shared to"
+      }
+    },
+    "sharedTenancyOption": {
+      "type": "string",
+      "enum": [
+        "SHARED",
+        "ALL",
+        "NONE"
+      ],
+      "description": "Specify different shared tenancy options"
+    },
+    "_links": {
+      "type": "object",
+      "description": "Hypermedia (HAL) links to self and other resources.",
+      "properties": {
+        "self": {
+          "description": "Hypermedia self link.",
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "self"
+      ]
+    }
+  },
+  "required": [
+    "_links"
+  ]
+}

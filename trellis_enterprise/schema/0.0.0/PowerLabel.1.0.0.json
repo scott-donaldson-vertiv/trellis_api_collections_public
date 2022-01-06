@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "PowerLabel.1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name":{
+      "type":"string",
+      "description":"The power label name.",
+      "readonly": false
+    }
+  }
+}

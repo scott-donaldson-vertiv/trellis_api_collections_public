@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "NotificationPreferences.2.0.0",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The globally unique id of this resource.",
+      "readonly": true
+    },
+    "userName": {
+      "type": "string",
+      "description": "The user name that this notification setting is for including tenancy if applicable Ex. tenantX|userX.",
+      "readonly": true,
+      "requiredOnCreate": true
+    },
+    "emailAddress": {
+      "type": "string",
+      "description": "Email address to use for notification to this user.",
+      "requiredOnCreate": true
+    },
+    "smsNumber": {
+      "type": "string",
+      "description": "SMS number to use for notifications to this user."
+    },
+    "stopNotificationFrom ": {
+      "type": "string",
+      "format": "date-time (An ISO8601 short format string of yyyy-MM-dd in UTC time)",
+      "description": "Date to stop notifications."
+    },
+    "stopNotificationTo": {
+      "type": "string",
+      "format": "date-time (An ISO8601 short format string of yyyy-MM-dd in UTC time)",
+      "description": "Date to restart notifications."
+    },
+    "contactDuringWorkingHours": {
+      "type": "boolean",
+      "description": "Should this user be contacted during working hours?"
+    },
+    "contactOutsideWorkingHours": {
+      "type": "boolean",
+      "description": "Should this user be contacted outside of working hours?"
+    },
+    "contactDuringWorkingHoursBy": {
+      "type": "string",
+      "description": "SMS, EMAIL, or BOTH."
+    },
+    "contactOutsideWorkingHoursBy": {
+      "type": "string",
+      "description": "SMS, EMAIL, or BOTH."
+    },
+    "workSchedule": {
+      "type": "array",
+      "description": "Definition of working hours for this user",
+      "items": {
+        "type": "object",
+        "properties": {
+          "day": {
+            "type": "string"
+          },
+          "isWorkDay": {
+            "type": "boolean"
+          },
+          "fromTime": {
+            "type": "string",
+            "format": "date-time (An ISO8601 short format string of HH:MM:SS in UTC time)"
+          },
+          "toTime": {
+            "type": "string",
+            "format": "date-time (An ISO8601 short format string of HH:MM:SS in UTC time)"
+          }
+        }
+      }
+    }
+  },
+  "_links": {
+    "type": "object",
+    "description": "Hypermedia (HAL) links to self and other resources.",
+    "properties": {
+      "self": {
+        "description": "Hypermedia self link.",
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "required": [
+      "self"
+    ]
+  },
+  "required": [
+    "_links"
+  ]
+}
